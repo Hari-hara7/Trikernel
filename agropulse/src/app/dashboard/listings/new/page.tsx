@@ -51,7 +51,8 @@ export default function NewListingPage() {
         description: "Your crop listing is now live.",
         variant: "success",
       });
-      router.push(`/dashboard/listings/${data.id}`);
+      // Redirect to listings page instead of non-existent detail page
+      router.push(`/dashboard/listings`);
     },
     onError: (error) => {
       toast({
