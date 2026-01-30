@@ -36,6 +36,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { Switch } from "~/components/ui/switch";
 import { useToast } from "~/hooks/use-toast";
 import { Separator } from "~/components/ui/separator";
+import { TwoFactorSettings } from "~/components/security/two-factor-settings";
 
 interface ProfileFormData {
   name: string;
@@ -558,7 +559,10 @@ export default function ProfilePage() {
         </TabsContent>
 
         {/* Security Tab */}
-        <TabsContent value="security" className="mt-6">
+        <TabsContent value="security" className="mt-6 space-y-6">
+          {/* Two-Factor Authentication */}
+          <TwoFactorSettings />
+          
           <Card>
             <CardHeader>
               <CardTitle>Security Settings</CardTitle>

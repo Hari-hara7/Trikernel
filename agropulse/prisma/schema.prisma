@@ -266,7 +266,7 @@ model Rating {
 model MandiPrice {
     id          String   @id @default(cuid())
     cropName    String
-    variety     String?
+    variety     String?   // Made optional for legacy data
     
     // Market info
     mandiName   String
@@ -356,6 +356,10 @@ enum AuditAction {
     PAYMENT_COMPLETED
     MESSAGE_SENT
     ADMIN_ACTION
+    TWO_FACTOR_ENABLED
+    TWO_FACTOR_DISABLED
+    TWO_FACTOR_VERIFIED
+    TWO_FACTOR_FAILED
 }
 
 model AuditLog {

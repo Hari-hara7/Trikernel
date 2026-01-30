@@ -3,7 +3,7 @@ import { PrismaClient } from "../generated/prisma";
 const prisma = new PrismaClient();
 
 // The main user ID to seed data for
-const MAIN_USER_ID = "cml0nygvn0000qlpoksxqdke2";
+const MAIN_USER_ID = "cml0x03rg000ifp8odmtt8r46";
 
 async function main() {
   console.log("🌱 Starting database seed...");

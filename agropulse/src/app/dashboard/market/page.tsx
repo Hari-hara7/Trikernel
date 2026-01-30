@@ -9,6 +9,9 @@ import {
   RefreshCw,
   MapPin,
   ArrowRight,
+  Zap,
+  Loader2,
+  Globe,
 } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -75,6 +78,17 @@ export default function MarketPage() {
     },
   });
 
+  // Live prices from govt API
+  const { data: liveData, isLoading: loadingLive, refetch: refetchLive, isSuccess: liveSuccess } =
+    api.market.fetchFreshPrices.useQuery(
+      { state: selectedState, limit: 50 },
+      { enabled: false } // Only fetch on demand
+    );
+
+  const handleFetchLive = () => {
+    void refetchLive();
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -86,6 +100,25 @@ export default function MarketPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button
+            variant="default"
+            size="sm"
+            onClick={handleFetchLive}
+            disabled={loadingLive}
+            className="gap-2 bg-green-600 hover:bg-green-700"
+          >
+            {loadingLive ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Fetching...
+              </>
+            ) : (
+              <>
+                <Globe className="h-4 w-4" />
+                Fetch Live Prices
+              </>
+            )}
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -107,12 +140,26 @@ export default function MarketPage() {
         </div>
       </div>
 
+      {/* Live Price Status Banner */}
+      {liveSuccess && liveData && (
+        <div className="p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-700">
+          <Zap className="h-4 w-4" />
+          <span className="text-sm">
+            Successfully fetched {liveData.count} live prices from Government API
+          </span>
+        </div>
+      )}
+
       {/* Tabs */}
       <Tabs defaultValue="prices">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="prices" className="gap-2">
             <BarChart3 className="h-4 w-4" />
             Mandi Prices
+          </TabsTrigger>
+          <TabsTrigger value="live" className="gap-2">
+            <Globe className="h-4 w-4" />
+            Live API
           </TabsTrigger>
           <TabsTrigger value="comparison" className="gap-2">
             <TrendingUp className="h-4 w-4" />
@@ -215,6 +262,93 @@ export default function MarketPage() {
               </CardContent>
             </Card>
           )}
+        </TabsContent>
+
+        {/* Live API Tab */}
+        <TabsContent value="live" className="mt-6 space-y-6">
+          <Card className="border-green-200 bg-green-50/50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-700">
+                <Globe className="h-5 w-5" />
+                Live Government API Data
+              </CardTitle>
+              <CardDescription>
+                Real-time mandi prices from Data.gov.in AGMARKET API
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex flex-wrap gap-4">
+                <Select value={selectedState} onValueChange={setSelectedState}>
+                  <SelectTrigger className="w-[200px]">
+                    <MapPin className="h-4 w-4 mr-2" />
+                    <SelectValue placeholder="Select state" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {STATES.map((state) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Button
+                  onClick={handleFetchLive}
+                  disabled={loadingLive}
+                  className="gap-2"
+                >
+                  {loadingLive ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Fetching from API...
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="h-4 w-4" />
+                      Fetch Latest Prices
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                <div className="p-4 bg-white rounded-lg border">
+                  <h4 className="font-medium text-sm text-muted-foreground">Data Source</h4>
+                  <p className="mt-1 font-semibold">AGMARKET - Data.gov.in</p>
+                </div>
+                <div className="p-4 bg-white rounded-lg border">
+                  <h4 className="font-medium text-sm text-muted-foreground">API Type</h4>
+                  <p className="mt-1 font-semibold">Government Open Data</p>
+                </div>
+                <div className="p-4 bg-white rounded-lg border">
+                  <h4 className="font-medium text-sm text-muted-foreground">Update Frequency</h4>
+                  <p className="mt-1 font-semibold">Daily</p>
+                </div>
+              </div>
+
+              {liveSuccess && liveData && (
+                <div className="mt-4 p-4 bg-green-100 rounded-lg border border-green-300">
+                  <div className="flex items-center gap-2 text-green-800">
+                    <Zap className="h-5 w-5" />
+                    <span className="font-semibold">Live Data Retrieved!</span>
+                  </div>
+                  <p className="mt-1 text-sm text-green-700">
+                    Fetched {liveData.count} price records from the government API.
+                    Data has been synced to the database.
+                  </p>
+                </div>
+              )}
+
+              {!liveSuccess && !loadingLive && (
+                <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                  <p className="text-amber-700 text-sm">
+                    Note: The government API may have rate limits or connectivity issues. 
+                    Using cached/seeded data as fallback.
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </TabsContent>
 
         {/* Price Comparison Tab */}
@@ -436,7 +570,7 @@ export default function MarketPage() {
                 AI Market Insights
               </CardTitle>
               <CardDescription>
-                Powered by machine learning predictions
+                Powered by Gemini AI for intelligent market analysis
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -460,6 +594,24 @@ export default function MarketPage() {
                     Wheat prices expected to remain stable. Onion and tomato prices
                     may increase due to seasonal demand.
                   </p>
+                </div>
+              </div>
+
+              <div className="mt-4 p-4 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-lg border">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold">Want more AI-powered insights?</h4>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Get disease detection, weather recommendations, soil analysis, and more
+                    </p>
+                  </div>
+                  <a href="/dashboard/ai-assistant">
+                    <Button className="gap-2">
+                      <Brain className="h-4 w-4" />
+                      AI Assistant
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </CardContent>

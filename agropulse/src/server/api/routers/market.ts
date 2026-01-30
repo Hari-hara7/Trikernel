@@ -1,6 +1,14 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "~/server/api/trpc";
+import {
+  getMandiPricesWithFallback,
+  syncMandiPricesToDatabase,
+  getAvailableStates,
+  getAvailableCommodities,
+  getCropPriceTrend,
+  fetchLiveMandiPrices,
+} from "~/server/services/mandi-prices";
 
 export const marketRouter = createTRPCRouter({
   // Get mandi prices
@@ -207,4 +215,91 @@ export const marketRouter = createTRPCRouter({
 
     return { success: true, count: prices.length };
   }),
+
+  // ==================== LIVE MANDI PRICES ====================
+
+  // Get live mandi prices with fallback to cached
+  getLiveMandiPrices: publicProcedure
+    .input(
+      z.object({
+        cropName: z.string().optional(),
+        state: z.string().optional(),
+        district: z.string().optional(),
+        limit: z.number().min(1).max(100).default(50),
+      })
+    )
+    .query(async ({ input }) => {
+      const result = await getMandiPricesWithFallback({
+        cropName: input.cropName,
+        state: input.state,
+        district: input.district,
+        limit: input.limit,
+      });
+      return result;
+    }),
+
+  // Sync prices from government API
+  syncLivePrices: protectedProcedure
+    .input(
+      z.object({
+        state: z.string().optional(),
+        commodity: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const result = await syncMandiPricesToDatabase({
+        state: input.state,
+        commodity: input.commodity,
+      });
+      return result;
+    }),
+
+  // Get available states for filtering
+  getAvailableStates: publicProcedure.query(async () => {
+    return await getAvailableStates();
+  }),
+
+  // Get available commodities for filtering
+  getAvailableCommodities: publicProcedure.query(async () => {
+    return await getAvailableCommodities();
+  }),
+
+  // Get price trend for a crop
+  getPriceTrend: publicProcedure
+    .input(
+      z.object({
+        cropName: z.string(),
+        state: z.string().optional(),
+        days: z.number().min(7).max(90).default(30),
+      })
+    )
+    .query(async ({ input }) => {
+      return await getCropPriceTrend({
+        cropName: input.cropName,
+        state: input.state,
+        days: input.days,
+      });
+    }),
+
+  // Fetch fresh prices directly from API (no caching)
+  fetchFreshPrices: publicProcedure
+    .input(
+      z.object({
+        state: z.string().optional(),
+        commodity: z.string().optional(),
+        limit: z.number().min(1).max(100).default(50),
+      })
+    )
+    .query(async ({ input }) => {
+      const records = await fetchLiveMandiPrices({
+        state: input.state,
+        commodity: input.commodity,
+        limit: input.limit,
+      });
+      return {
+        records,
+        fetchedAt: new Date(),
+        count: records.length,
+      };
+    }),
 });

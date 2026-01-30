@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Package, TrendingUp, ShoppingCart, ArrowRight, Search, MapPin, Star } from "lucide-react";
+import { Package, TrendingUp, ShoppingCart, ArrowRight, Search, MapPin, Star, Brain, MessageSquare, FileText, BarChart3 } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
@@ -97,6 +97,59 @@ export function BuyerDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* AI Quick Actions for Buyers */}
+      <Card className="border-secondary/30 bg-gradient-to-r from-secondary/5 to-primary/5">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Brain className="h-5 w-5 text-secondary" />
+            AI-Powered Tools
+          </CardTitle>
+          <CardDescription>
+            Smart buying assistance powered by Gemini AI
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            <Link href="/dashboard/ai-assistant?tab=prices" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-green-400 hover:shadow-sm transition-all">
+                <TrendingUp className="h-6 w-6 text-green-600 mb-2" />
+                <h4 className="font-medium">Price Comparison</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Find best prices across markets
+                </p>
+              </div>
+            </Link>
+            <Link href="/dashboard/ai-assistant?tab=negotiate" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-indigo-400 hover:shadow-sm transition-all">
+                <MessageSquare className="h-6 w-6 text-indigo-600 mb-2" />
+                <h4 className="font-medium">Negotiation Tips</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Get AI advice for negotiations
+                </p>
+              </div>
+            </Link>
+            <Link href="/dashboard/ai-assistant?tab=schemes" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-purple-400 hover:shadow-sm transition-all">
+                <FileText className="h-6 w-6 text-purple-600 mb-2" />
+                <h4 className="font-medium">Govt Schemes</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Find schemes & subsidies
+                </p>
+              </div>
+            </Link>
+            <Link href="/dashboard/market" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-blue-400 hover:shadow-sm transition-all">
+                <BarChart3 className="h-6 w-6 text-blue-600 mb-2" />
+                <h4 className="font-medium">Market Intelligence</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Live mandi prices & trends
+                </p>
+              </div>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Recommended Listings */}
       <Card>

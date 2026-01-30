@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Package, TrendingUp, Plus, ArrowRight, Gavel, Sparkles } from "lucide-react";
+import { Package, TrendingUp, Plus, ArrowRight, Gavel, Sparkles, Leaf, Cloud, FlaskConical, Brain } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
@@ -95,6 +95,59 @@ export function FarmerDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* AI Quick Actions */}
+      <Card className="border-secondary/30 bg-gradient-to-r from-secondary/5 to-primary/5">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Brain className="h-5 w-5 text-secondary" />
+            AI-Powered Tools
+          </CardTitle>
+          <CardDescription>
+            Smart farming assistance powered by Gemini AI
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            <Link href="/dashboard/ai-assistant?tab=disease" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-green-400 hover:shadow-sm transition-all">
+                <Leaf className="h-6 w-6 text-green-600 mb-2" />
+                <h4 className="font-medium">Disease Detection</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Identify crop diseases from symptoms
+                </p>
+              </div>
+            </Link>
+            <Link href="/dashboard/ai-assistant?tab=weather" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-blue-400 hover:shadow-sm transition-all">
+                <Cloud className="h-6 w-6 text-blue-600 mb-2" />
+                <h4 className="font-medium">Weather Advice</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Get farming tips based on weather
+                </p>
+              </div>
+            </Link>
+            <Link href="/dashboard/ai-assistant?tab=soil" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-amber-400 hover:shadow-sm transition-all">
+                <FlaskConical className="h-6 w-6 text-amber-600 mb-2" />
+                <h4 className="font-medium">Soil Analysis</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Analyze soil health & get tips
+                </p>
+              </div>
+            </Link>
+            <Link href="/dashboard/ai-assistant?tab=prices" className="block">
+              <div className="p-4 bg-white rounded-lg border hover:border-green-400 hover:shadow-sm transition-all">
+                <TrendingUp className="h-6 w-6 text-green-600 mb-2" />
+                <h4 className="font-medium">Price Comparison</h4>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Compare prices across markets
+                </p>
+              </div>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Recent Bids */}
       <Card>

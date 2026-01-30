@@ -16,6 +16,7 @@ import {
   X,
   User,
   Globe,
+  Brain,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -38,6 +39,7 @@ const farmerNavItems = [
   { href: "/dashboard/listings", labelKey: "nav.myListings", icon: Package },
   { href: "/dashboard/bids", labelKey: "bids.receivedBids", icon: ShoppingCart },
   { href: "/dashboard/market", labelKey: "nav.market", icon: BarChart3 },
+  { href: "/dashboard/ai-assistant", labelKey: "nav.aiAssistant", icon: Brain },
   { href: "/dashboard/messages", labelKey: "nav.messages", icon: MessageSquare },
 ];
 
@@ -46,6 +48,7 @@ const buyerNavItems = [
   { href: "/dashboard/browse", labelKey: "nav.browse", icon: Package },
   { href: "/dashboard/my-bids", labelKey: "bids.myBids", icon: ShoppingCart },
   { href: "/dashboard/market", labelKey: "nav.market", icon: BarChart3 },
+  { href: "/dashboard/ai-assistant", labelKey: "nav.aiAssistant", icon: Brain },
   { href: "/dashboard/messages", labelKey: "nav.messages", icon: MessageSquare },
 ];
 

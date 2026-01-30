@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 
 import { db } from "~/server/db";
 import { type UserRole } from "../../../generated/prisma";
+import { verifyTwoFactorToken } from "~/lib/two-factor";
 
 // Rate limiting for authentication attempts
 const authLimiter = rateLimit({
@@ -48,6 +49,7 @@ export const authConfig = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        twoFactorToken: { label: "2FA Code", type: "text" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -80,6 +82,26 @@ export const authConfig = {
           // Log failed attempt
           await logAuthAttempt(user.id, "INVALID_PASSWORD", credentials.email as string);
           throw new Error("Invalid credentials");
+        }
+
+        // Check if 2FA is enabled
+        if (user.twoFactorEnabled && user.twoFactorSecret) {
+          const twoFactorToken = credentials.twoFactorToken as string | undefined;
+          
+          if (!twoFactorToken) {
+            // Return special error to indicate 2FA is required
+            throw new Error("2FA_REQUIRED");
+          }
+
+          const isValidToken = verifyTwoFactorToken(twoFactorToken, user.twoFactorSecret);
+          
+          if (!isValidToken) {
+            await logAuthAttempt(user.id, "INVALID_2FA_TOKEN", credentials.email as string);
+            throw new Error("Invalid 2FA code");
+          }
+
+          // Log successful 2FA verification
+          await logAuthAttempt(user.id, "2FA_SUCCESS", credentials.email as string);
         }
 
         // Log successful login
@@ -164,17 +186,22 @@ export const authConfig = {
     async signIn({ user, account, profile }) {
       // Additional security checks
       if (account?.provider === "credentials" && user?.id) {
-        const dbUser = await db.user.findUnique({
-          where: { id: user.id },
-          select: { isActive: true, lockedUntil: true, failedLoginAttempts: true },
-        });
+        try {
+          const dbUser = await db.user.findUnique({
+            where: { id: user.id },
+            select: { isActive: true, lockedUntil: true, failedLoginAttempts: true },
+          });
 
-        if (!dbUser?.isActive) {
-          throw new Error("Account is deactivated");
-        }
+          if (!dbUser?.isActive) {
+            return false; // Return false instead of throwing
+          }
 
-        if (dbUser.lockedUntil && dbUser.lockedUntil > new Date()) {
-          throw new Error("Account is temporarily locked due to too many failed attempts");
+          if (dbUser.lockedUntil && dbUser.lockedUntil > new Date()) {
+            return false; // Return false instead of throwing
+          }
+        } catch (error) {
+          console.error("SignIn callback error:", error);
+          return false;
         }
       }
       return true;

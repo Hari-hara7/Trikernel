@@ -6,6 +6,13 @@ import {
   getAICropRecommendation,
   chatWithAI,
   analyzeMarketTrends,
+  detectCropDisease,
+  getWeatherBasedRecommendations,
+  compareMarketPrices,
+  analyzeSoilHealth,
+  matchGovernmentSchemes,
+  predictHarvestQuality,
+  getNegotiationAdvice,
 } from "~/server/services/gemini";
 
 export const aiRouter = createTRPCRouter({
@@ -363,6 +370,177 @@ export const aiRouter = createTRPCRouter({
         confidence: prediction.confidence,
         recommendation: prediction.recommendation,
         factors: prediction.factors,
+      };
+    }),
+
+  // ==================== ENHANCED AI FEATURES ====================
+
+  // Crop Disease Detection
+  detectDisease: protectedProcedure
+    .input(
+      z.object({
+        cropName: z.string(),
+        symptoms: z.string().min(10, "Please describe symptoms in detail"),
+        affectedPart: z.string().optional(),
+        weatherConditions: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await detectCropDisease(input);
+    }),
+
+  // Weather-Based Recommendations
+  getWeatherRecommendations: protectedProcedure
+    .input(
+      z.object({
+        state: z.string(),
+        district: z.string().optional(),
+        currentCrops: z.array(z.string()).optional(),
+        season: z.string(),
+        weatherForecast: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await getWeatherBasedRecommendations(input);
+    }),
+
+  // Market Price Comparison
+  comparePrices: protectedProcedure
+    .input(
+      z.object({
+        cropName: z.string(),
+        quantity: z.number(),
+        sellerState: z.string(),
+        prices: z.array(
+          z.object({
+            mandiName: z.string(),
+            state: z.string(),
+            price: z.number(),
+          })
+        ),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await compareMarketPrices(input);
+    }),
+
+  // Soil Health Analysis
+  analyzeSoil: protectedProcedure
+    .input(
+      z.object({
+        soilType: z.string(),
+        phLevel: z.number().optional(),
+        nitrogenLevel: z.string().optional(),
+        phosphorusLevel: z.string().optional(),
+        potassiumLevel: z.string().optional(),
+        organicMatter: z.string().optional(),
+        currentCrop: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await analyzeSoilHealth(input);
+    }),
+
+  // Government Scheme Matcher
+  matchSchemes: protectedProcedure
+    .input(
+      z.object({
+        state: z.string(),
+        farmerType: z.enum(["small", "marginal", "medium", "large"]),
+        landSize: z.number(),
+        cropTypes: z.array(z.string()),
+        hasKCC: z.boolean().optional(),
+        hasBankAccount: z.boolean().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await matchGovernmentSchemes(input);
+    }),
+
+  // Harvest Quality Predictor
+  predictQuality: protectedProcedure
+    .input(
+      z.object({
+        cropName: z.string(),
+        sowingDate: z.string(),
+        currentGrowthStage: z.string(),
+        irrigationFrequency: z.string(),
+        fertiliserUsed: z.array(z.string()).optional(),
+        pestIssues: z.string().optional(),
+        weatherConditions: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await predictHarvestQuality(input);
+    }),
+
+  // Negotiation Advisor
+  getNegotiationAdvice: protectedProcedure
+    .input(
+      z.object({
+        cropName: z.string(),
+        quantity: z.number(),
+        yourAskingPrice: z.number(),
+        buyerOffer: z.number(),
+        marketPrice: z.number(),
+        cropQuality: z.string(),
+        urgencyToSell: z.enum(["high", "medium", "low"]),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await getNegotiationAdvice(input);
+    }),
+
+  // Smart Price Comparison with live mandi data
+  smartPriceCompare: protectedProcedure
+    .input(
+      z.object({
+        cropName: z.string(),
+        quantity: z.number(),
+        state: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Get live mandi prices from database
+      const mandiPrices = await ctx.db.mandiPrice.findMany({
+        where: {
+          cropName: { contains: input.cropName, mode: "insensitive" },
+        },
+        orderBy: { priceDate: "desc" },
+        take: 20,
+        distinct: ["mandiName"],
+      });
+
+      if (mandiPrices.length === 0) {
+        return {
+          message: "No market data available for this crop",
+          prices: [],
+        };
+      }
+
+      // Use AI to compare prices
+      const comparison = await compareMarketPrices({
+        cropName: input.cropName,
+        quantity: input.quantity,
+        sellerState: input.state,
+        prices: mandiPrices.map((p) => ({
+          mandiName: p.mandiName,
+          state: p.state,
+          price: p.modalPrice,
+        })),
+      });
+
+      return {
+        ...comparison,
+        mandiPrices: mandiPrices.map((p) => ({
+          mandiName: p.mandiName,
+          state: p.state,
+          district: p.district,
+          minPrice: p.minPrice,
+          maxPrice: p.maxPrice,
+          modalPrice: p.modalPrice,
+          priceDate: p.priceDate,
+        })),
       };
     }),
 });
