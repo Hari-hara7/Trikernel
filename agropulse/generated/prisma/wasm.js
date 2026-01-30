@@ -395,7 +395,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\harih\\New folder\\Trikernel\\agropulse\\generated\\prisma",
+      "value": "C:\\My Projects\\Trikernel\\agropulse\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -409,7 +409,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\harih\\New folder\\Trikernel\\agropulse\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\My Projects\\Trikernel\\agropulse\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -423,6 +423,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

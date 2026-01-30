@@ -92,14 +92,16 @@ export default function MarketPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Market Intelligence</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight">Market Intelligence</h1>
+          <p className="text-lg text-muted-foreground">
             Live mandi prices and AI-powered market insights
           </p>
         </div>
-        <div className="flex items-center gap-2">
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center gap-3">
           <Button
             variant="default"
             size="sm"
@@ -142,11 +144,18 @@ export default function MarketPage() {
 
       {/* Live Price Status Banner */}
       {liveSuccess && liveData && (
-        <div className="p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-700">
-          <Zap className="h-4 w-4" />
-          <span className="text-sm">
-            Successfully fetched {liveData.count} live prices from Government API
-          </span>
+        <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
+          <div className="mt-0.5">
+            <Zap className="h-5 w-5 text-green-600" />
+          </div>
+          <div className="flex-1">
+            <p className="font-semibold text-green-900">
+              Successfully fetched {liveData.count} live prices from Government API
+            </p>
+            <p className="text-sm text-green-700 mt-1">
+              Data has been synced to the database and is ready for analysis.
+            </p>
+          </div>
         </div>
       )}
 
@@ -173,6 +182,57 @@ export default function MarketPage() {
 
         {/* Mandi Prices Tab */}
         <TabsContent value="prices" className="mt-6 space-y-6">
+          {/* Quick Stats */}
+          {mandiPrices && mandiPrices.length > 0 && (
+            <div className="grid gap-4 md:grid-cols-4">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-muted-foreground">Total Records</p>
+                    <p className="text-3xl font-bold text-green-600 mt-2">{mandiPrices.length}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Synced to database</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-muted-foreground">Unique Crops</p>
+                    <p className="text-3xl font-bold text-blue-600 mt-2">
+                      {new Set(mandiPrices.map((p) => p.cropName)).size}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">In {selectedState}</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-muted-foreground">Avg Price Range</p>
+                    <p className="text-3xl font-bold text-purple-600 mt-2">
+                      {formatCurrency(
+                        mandiPrices.reduce((sum, p) => sum + p.modalPrice, 0) /
+                          mandiPrices.length
+                      )}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Per quintal</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-muted-foreground">Mandis Tracked</p>
+                    <p className="text-3xl font-bold text-orange-600 mt-2">
+                      {new Set(mandiPrices.map((p) => p.mandiName)).size}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">Active markets</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
           {/* Filter */}
           <div className="flex gap-4">
             <Select value={selectedState} onValueChange={setSelectedState}>
@@ -203,7 +263,7 @@ export default function MarketPage() {
                 const isUp = deviation >= 0;
 
                 return (
-                  <Card key={price.id} className="hover:shadow-md transition-shadow">
+                  <Card key={price.id} className="hover:shadow-md transition-shadow border-l-4 border-l-green-500">
                     <CardContent className="pt-6">
                       <div className="flex items-start justify-between">
                         <div>
@@ -227,8 +287,8 @@ export default function MarketPage() {
 
                       <div className="mt-4 flex items-end justify-between">
                         <div>
-                          <p className="text-xs text-muted-foreground">Modal Price</p>
-                          <p className="text-2xl font-bold text-primary">
+                          <p className="text-xs text-muted-foreground uppercase tracking-wide">Modal Price</p>
+                          <p className="text-2xl font-bold text-green-600">
                             {formatCurrency(price.modalPrice)}
                           </p>
                           <p className="text-xs text-muted-foreground">
@@ -236,7 +296,7 @@ export default function MarketPage() {
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs text-muted-foreground">Range</p>
+                          <p className="text-xs text-muted-foreground uppercase tracking-wide">Range</p>
                           <p className="text-sm text-muted-foreground">
                             {formatCurrency(price.minPrice)} - {formatCurrency(price.maxPrice)}
                           </p>
@@ -255,9 +315,9 @@ export default function MarketPage() {
             <Card>
               <CardContent className="py-12 text-center">
                 <BarChart3 className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-                <p className="text-muted-foreground">No price data available</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Click &quot;Seed Demo Data&quot; to populate sample prices
+                <p className="text-muted-foreground font-medium">No price data available</p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Click &quot;Fetch Live Prices&quot; or &quot;Seed Demo Data&quot; to populate prices
                 </p>
               </CardContent>
             </Card>
@@ -266,17 +326,29 @@ export default function MarketPage() {
 
         {/* Live API Tab */}
         <TabsContent value="live" className="mt-6 space-y-6">
-          <Card className="border-green-200 bg-green-50/50">
+          {/* API Status Card */}
+          <Card className="border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-700">
-                <Globe className="h-5 w-5" />
-                Live Government API Data
-              </CardTitle>
-              <CardDescription>
-                Real-time mandi prices from Data.gov.in AGMARKET API
-              </CardDescription>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-600 rounded-lg">
+                    <Globe className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-green-900">Live Government API Data</CardTitle>
+                    <CardDescription className="text-green-700">
+                      Real-time mandi prices from Data.gov.in AGMARKET API
+                    </CardDescription>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 bg-green-600 rounded-full animate-pulse" />
+                  <span className="text-xs font-medium text-green-700">Live</span>
+                </div>
+              </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
+              {/* Controls */}
               <div className="flex flex-wrap gap-4">
                 <Select value={selectedState} onValueChange={setSelectedState}>
                   <SelectTrigger className="w-[200px]">
@@ -295,7 +367,7 @@ export default function MarketPage() {
                 <Button
                   onClick={handleFetchLive}
                   disabled={loadingLive}
-                  className="gap-2"
+                  className="gap-2 bg-green-600 hover:bg-green-700"
                 >
                   {loadingLive ? (
                     <>
@@ -311,40 +383,70 @@ export default function MarketPage() {
                 </Button>
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-                <div className="p-4 bg-white rounded-lg border">
-                  <h4 className="font-medium text-sm text-muted-foreground">Data Source</h4>
-                  <p className="mt-1 font-semibold">AGMARKET - Data.gov.in</p>
+              {/* API Info Grid */}
+              <div className="grid gap-3 md:grid-cols-3">
+                <div className="p-4 bg-white rounded-lg border border-green-200 hover:shadow-sm transition-shadow">
+                  <h4 className="font-medium text-sm text-gray-600 uppercase tracking-wide">Data Source</h4>
+                  <p className="mt-2 font-semibold text-lg text-gray-900">AGMARKET</p>
+                  <p className="text-xs text-gray-500 mt-1">Data.gov.in</p>
                 </div>
-                <div className="p-4 bg-white rounded-lg border">
-                  <h4 className="font-medium text-sm text-muted-foreground">API Type</h4>
-                  <p className="mt-1 font-semibold">Government Open Data</p>
+                <div className="p-4 bg-white rounded-lg border border-green-200 hover:shadow-sm transition-shadow">
+                  <h4 className="font-medium text-sm text-gray-600 uppercase tracking-wide">API Type</h4>
+                  <p className="mt-2 font-semibold text-lg text-gray-900">Government</p>
+                  <p className="text-xs text-gray-500 mt-1">Open Data</p>
                 </div>
-                <div className="p-4 bg-white rounded-lg border">
-                  <h4 className="font-medium text-sm text-muted-foreground">Update Frequency</h4>
-                  <p className="mt-1 font-semibold">Daily</p>
+                <div className="p-4 bg-white rounded-lg border border-green-200 hover:shadow-sm transition-shadow">
+                  <h4 className="font-medium text-sm text-gray-600 uppercase tracking-wide">Update Frequency</h4>
+                  <p className="mt-2 font-semibold text-lg text-gray-900">Daily</p>
+                  <p className="text-xs text-gray-500 mt-1">Automatic sync</p>
                 </div>
               </div>
 
+              {/* Data Sync Status */}
               {liveSuccess && liveData && (
-                <div className="mt-4 p-4 bg-green-100 rounded-lg border border-green-300">
-                  <div className="flex items-center gap-2 text-green-800">
-                    <Zap className="h-5 w-5" />
-                    <span className="font-semibold">Live Data Retrieved!</span>
+                <div className="mt-4 p-4 bg-green-100 border border-green-300 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1">
+                      <Zap className="h-5 w-5 text-green-700" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-green-900">Live Data Retrieved!</div>
+                      <p className="text-sm text-green-800 mt-1">
+                        Fetched <strong>{liveData.count} price records</strong> from the government API.
+                      </p>
+                      <p className="text-sm text-green-800 mt-1">
+                        ✓ Data has been synced to the database.
+                      </p>
+                      <p className="text-xs text-green-700 mt-2">
+                        You can now use this data for market analysis, price trends, and comparison reports.
+                      </p>
+                    </div>
                   </div>
-                  <p className="mt-1 text-sm text-green-700">
-                    Fetched {liveData.count} price records from the government API.
-                    Data has been synced to the database.
+                </div>
+              )}
+
+              {seedMutation.isSuccess && (
+                <div className="mt-4 p-4 bg-blue-100 border border-blue-300 rounded-lg">
+                  <div className="flex items-center gap-2 text-blue-900">
+                    <Zap className="h-5 w-5" />
+                    <span className="font-semibold">Demo Data Seeded Successfully!</span>
+                  </div>
+                  <p className="text-sm text-blue-800 mt-1">
+                    Sample prices have been added to the database for testing and analysis.
                   </p>
                 </div>
               )}
 
-              {!liveSuccess && !loadingLive && (
-                <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
-                  <p className="text-amber-700 text-sm">
-                    Note: The government API may have rate limits or connectivity issues. 
-                    Using cached/seeded data as fallback.
+              {!liveSuccess && !loadingLive && !seedMutation.isSuccess && (
+                <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-amber-900 text-sm font-medium">
+                    📌 Getting Started
                   </p>
+                  <ul className="text-amber-800 text-sm mt-2 space-y-1">
+                    <li>• Click <strong>&quot;Fetch Latest Prices&quot;</strong> to sync live government API data</li>
+                    <li>• Or use <strong>&quot;Seed Demo Data&quot;</strong> to populate sample prices for testing</li>
+                    <li>• Once synced, data will appear in all market analysis tabs</li>
+                  </ul>
                 </div>
               )}
             </CardContent>
