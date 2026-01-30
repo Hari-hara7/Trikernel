@@ -1,0 +1,252 @@
+{
+  "common": {
+    "welcome": "ಸ್ವಾಗತ",
+    "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+    "save": "ಉಳಿಸಿ",
+    "cancel": "ರದ್ದುಮಾಡಿ",
+    "delete": "ಅಳಿಸಿ",
+    "edit": "ಸಂಪಾದಿಸಿ",
+    "submit": "ಸಲ್ಲಿಸಿ",
+    "search": "ಹುಡುಕಿ",
+    "close": "ಮುಚ್ಚಿ",
+    "back": "ಹಿಂದೆ",
+    "next": "ಮುಂದೆ",
+    "previous": "ಹಿಂದಿನ",
+    "yes": "ಹೌದು",
+    "no": "ಇಲ್ಲ",
+    "confirm": "ದೃಢೀಕರಿಸಿ",
+    "success": "ಯಶಸ್ಸು",
+    "error": "ದೋಷ",
+    "warning": "ಎಚ್ಚರಿಕೆ",
+    "info": "ಮಾಹಿತಿ",
+    "viewAll": "ಎಲ್ಲವನ್ನೂ ವೀಕ್ಷಿಸಿ",
+    "seeMore": "ಇನ್ನಷ್ಟು ನೋಡಿ",
+    "learnMore": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"
+  },
+  "nav": {
+    "home": "ಮುಖಪುಟ",
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "myListings": "ನನ್ನ ಪಟ್ಟಿಗಳು",
+    "browse": "ಬೆಳೆಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ",
+    "market": "ಮಾರುಕಟ್ಟೆ ಬೆಲೆಗಳು",
+    "messages": "ಸಂದೇಶಗಳು",
+    "myBids": "ನನ್ನ ಬಿಡ್‌ಗಳು",
+    "matchmaking": "AI ಮ್ಯಾಚ್‌ಮೇಕಿಂಗ್",
+    "profile": "ಪ್ರೊಫೈಲ್",
+    "settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "logout": "ಲಾಗ್ ಔಟ್",
+    "login": "ಲಾಗಿನ್",
+    "register": "ನೋಂದಣಿ"
+  },
+  "dashboard": {
+    "title": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "welcomeBack": "ಮರಳಿ ಸ್ವಾಗತ",
+    "overview": "ಅವಲೋಕನ",
+    "recentActivity": "ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆ",
+    "quickActions": "ತ್ವರಿತ ಕ್ರಿಯೆಗಳು",
+    "stats": {
+      "totalListings": "ಒಟ್ಟು ಪಟ್ಟಿಗಳು",
+      "activeListings": "ಸಕ್ರಿಯ ಪಟ್ಟಿಗಳು",
+      "pendingBids": "ಬಾಕಿ ಇರುವ ಬಿಡ್‌ಗಳು",
+      "completedDeals": "ಪೂರ್ಣಗೊಂಡ ಡೀಲ್‌ಗಳು",
+      "totalRevenue": "ಒಟ್ಟು ಆದಾಯ",
+      "averageRating": "ಸರಾಸರಿ ರೇಟಿಂಗ್"
+    }
+  },
+  "listings": {
+    "title": "ನನ್ನ ಪಟ್ಟಿಗಳು",
+    "createNew": "ಹೊಸ ಪಟ್ಟಿ ರಚಿಸಿ",
+    "editListing": "ಪಟ್ಟಿ ಸಂಪಾದಿಸಿ",
+    "cropName": "ಬೆಳೆ ಹೆಸರು",
+    "quantity": "ಪ್ರಮಾಣ",
+    "pricePerQuintal": "ಕ್ವಿಂಟಾಲ್‌ಗೆ ಬೆಲೆ",
+    "location": "ಸ್ಥಳ",
+    "harvestDate": "ಕೊಯ್ಲು ದಿನಾಂಕ",
+    "description": "ವಿವರಣೆ",
+    "quality": "ಗುಣಮಟ್ಟದ ದರ್ಜೆ",
+    "status": {
+      "active": "ಸಕ್ರಿಯ",
+      "sold": "ಮಾರಾಟವಾಗಿದೆ",
+      "expired": "ಅವಧಿ ಮುಗಿದಿದೆ",
+      "pending": "ಬಾಕಿ ಇದೆ"
+    },
+    "noListings": "ನಿಮ್ಮಲ್ಲಿ ಇನ್ನೂ ಪಟ್ಟಿಗಳಿಲ್ಲ",
+    "createFirst": "ಮಾರಾಟ ಪ್ರಾರಂಭಿಸಲು ನಿಮ್ಮ ಮೊದಲ ಪಟ್ಟಿ ರಚಿಸಿ"
+  },
+  "browse": {
+    "title": "ಬೆಳೆಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ",
+    "searchPlaceholder": "ಬೆಳೆಗಳನ್ನು ಹುಡುಕಿ...",
+    "filters": "ಫಿಲ್ಟರ್‌ಗಳು",
+    "sortBy": "ಕ್ರಮಬದ್ಧಗೊಳಿಸಿ",
+    "priceRange": "ಬೆಲೆ ಶ್ರೇಣಿ",
+    "cropType": "ಬೆಳೆ ಪ್ರಕಾರ",
+    "location": "ಸ್ಥಳ",
+    "quality": "ಗುಣಮಟ್ಟ",
+    "noResults": "ನಿಮ್ಮ ಮಾನದಂಡಗಳಿಗೆ ಹೊಂದಿಕೆಯಾಗುವ ಬೆಳೆಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    "adjustFilters": "ನಿಮ್ಮ ಫಿಲ್ಟರ್‌ಗಳನ್ನು ಹೊಂದಿಸಲು ಪ್ರಯತ್ನಿಸಿ"
+  },
+  "market": {
+    "title": "ಮಾರುಕಟ್ಟೆ ಬೆಲೆಗಳು",
+    "subtitle": "AI-ಚಾಲಿತ ರಿಯಲ್-ಟೈಮ್ ಮಾರುಕಟ್ಟೆ ಮಾಹಿತಿ",
+    "mandiPrices": "ಮಂಡಿ ಬೆಲೆಗಳು",
+    "priceAnalysis": "ಬೆಲೆ ವಿಶ್ಲೇಷಣೆ",
+    "predictions": "ಬೆಲೆ ಮುನ್ಸೂಚನೆಗಳು",
+    "trends": "ಮಾರುಕಟ್ಟೆ ಟ್ರೆಂಡ್‌ಗಳು",
+    "todayPrice": "ಇಂದಿನ ಬೆಲೆ",
+    "avgPrice": "ಸರಾಸರಿ ಬೆಲೆ",
+    "minPrice": "ಕನಿಷ್ಠ ಬೆಲೆ",
+    "maxPrice": "ಗರಿಷ್ಠ ಬೆಲೆ",
+    "change": "ಬದಲಾವಣೆ",
+    "aiRecommendation": "AI ಶಿಫಾರಸು",
+    "bestTimeToSell": "ಮಾರಾಟಕ್ಕೆ ಉತ್ತಮ ಸಮಯ",
+    "priceAlert": "ಬೆಲೆ ಎಚ್ಚರಿಕೆ ಹೊಂದಿಸಿ"
+  },
+  "bids": {
+    "title": "ಬಿಡ್‌ಗಳು",
+    "myBids": "ನನ್ನ ಬಿಡ್‌ಗಳು",
+    "receivedBids": "ಸ್ವೀಕರಿಸಿದ ಬಿಡ್‌ಗಳು",
+    "placeBid": "ಬಿಡ್ ಹಾಕಿ",
+    "acceptBid": "ಬಿಡ್ ಸ್ವೀಕರಿಸಿ",
+    "rejectBid": "ಬಿಡ್ ತಿರಸ್ಕರಿಸಿ",
+    "counterOffer": "ಪ್ರತಿ ಆಫರ್",
+    "bidAmount": "ಬಿಡ್ ಮೊತ್ತ",
+    "bidStatus": {
+      "pending": "ಬಾಕಿ ಇದೆ",
+      "accepted": "ಸ್ವೀಕರಿಸಲಾಗಿದೆ",
+      "rejected": "ತಿರಸ್ಕರಿಸಲಾಗಿದೆ",
+      "countered": "ಪ್ರತಿ ಆಫರ್",
+      "expired": "ಅವಧಿ ಮುಗಿದಿದೆ"
+    },
+    "noBids": "ಇನ್ನೂ ಬಿಡ್‌ಗಳಿಲ್ಲ",
+    "bidPlaced": "ನಿಮ್ಮ ಬಿಡ್ ಯಶಸ್ವಿಯಾಗಿ ಹಾಕಲಾಗಿದೆ"
+  },
+  "messages": {
+    "title": "ಸಂದೇಶಗಳು",
+    "newMessage": "ಹೊಸ ಸಂದೇಶ",
+    "typeMessage": "ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಟೈಪ್ ಮಾಡಿ...",
+    "send": "ಕಳುಹಿಸಿ",
+    "noConversations": "ಇನ್ನೂ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ",
+    "startConversation": "ಖರೀದಿದಾರ ಅಥವಾ ಮಾರಾಟಗಾರರೊಂದಿಗೆ ಸಂಭಾಷಣೆ ಪ್ರಾರಂಭಿಸಿ",
+    "searchUsers": "ಬಳಕೆದಾರರನ್ನು ಹುಡುಕಿ..."
+  },
+  "matchmaking": {
+    "title": "AI ಮ್ಯಾಚ್‌ಮೇಕಿಂಗ್",
+    "subtitle": "ನಿಮ್ಮ ಬೆಳೆಗಳಿಗೆ ಸರಿಯಾದ ಖರೀದಿದಾರರನ್ನು ಹುಡುಕಿ",
+    "findBuyers": "ಖರೀದಿದಾರರನ್ನು ಹುಡುಕಿ",
+    "findSellers": "ಮಾರಾಟಗಾರರನ್ನು ಹುಡುಕಿ",
+    "matchScore": "ಮ್ಯಾಚ್ ಸ್ಕೋರ್",
+    "compatibility": "ಹೊಂದಾಣಿಕೆ",
+    "connect": "ಕನೆಕ್ಟ್ ಆಗಿ",
+    "noMatches": "ಮ್ಯಾಚ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    "tryAgain": "ನಿಮ್ಮ ಆದ್ಯತೆಗಳನ್ನು ಹೊಂದಿಸಲು ಪ್ರಯತ್ನಿಸಿ"
+  },
+  "profile": {
+    "title": "ಪ್ರೊಫೈಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "subtitle": "ನಿಮ್ಮ ಖಾತೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಆದ್ಯತೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+    "personalInfo": "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ",
+    "updateDetails": "ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ವಿವರಗಳು ಮತ್ತು ಆದ್ಯತೆಗಳನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡಿ",
+    "fullName": "ಪೂರ್ಣ ಹೆಸರು",
+    "email": "ಇಮೇಲ್ ವಿಳಾಸ",
+    "phone": "ಫೋನ್ ಸಂಖ್ಯೆ",
+    "location": "ಸ್ಥಳ",
+    "aboutMe": "ನನ್ನ ಬಗ್ಗೆ",
+    "farmDetails": "ಕೃಷಿ ವಿವರಗಳು",
+    "farmSize": "ಕೃಷಿ ಗಾತ್ರ",
+    "specializations": "ವಿಶೇಷತೆಗಳು",
+    "notifications": {
+      "title": "ನೋಟಿಫಿಕೇಶನ್ ಆದ್ಯತೆಗಳು",
+      "subtitle": "ನೀವು ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ಹೇಗೆ ಸ್ವೀಕರಿಸಲು ಬಯಸುತ್ತೀರಿ ಎಂದು ಆರಿಸಿ",
+      "email": "ಇಮೇಲ್ ನೋಟಿಫಿಕೇಶನ್‌ಗಳು",
+      "push": "ಪುಶ್ ನೋಟಿಫಿಕೇಶನ್‌ಗಳು",
+      "sms": "SMS ನೋಟಿಫಿಕೇಶನ್‌ಗಳು",
+      "bidAlerts": "ಬಿಡ್ ಎಚ್ಚರಿಕೆಗಳು",
+      "priceAlerts": "ಬೆಲೆ ಎಚ್ಚರಿಕೆಗಳು",
+      "messageAlerts": "ಸಂದೇಶ ಎಚ್ಚರಿಕೆಗಳು"
+    },
+    "language": {
+      "title": "ಭಾಷಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+      "subtitle": "ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಯನ್ನು ಆರಿಸಿ",
+      "note": "ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸುವುದರಿಂದ ಇಡೀ ಅಪ್ಲಿಕೇಶನ್ ಇಂಟರ್‌ಫೇಸ್ ಅನುವಾದಿಸಲಾಗುತ್ತದೆ."
+    },
+    "security": {
+      "title": "ಭದ್ರತಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+      "subtitle": "ನಿಮ್ಮ ಖಾತೆ ಭದ್ರತೆ ಮತ್ತು ಗೌಪ್ಯತೆಯನ್ನು ನಿರ್ವಹಿಸಿ",
+      "verified": "ಖಾತೆ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+      "connectedAccounts": "ಕನೆಕ್ಟ್ ಆದ ಖಾತೆಗಳು",
+      "paymentMethods": "ಪಾವತಿ ವಿಧಾನಗಳು",
+      "noPaymentMethods": "ಪಾವತಿ ವಿಧಾನಗಳು ಸೇರಿಸಲಾಗಿಲ್ಲ",
+      "addPaymentMethod": "ಪಾವತಿ ವಿಧಾನ ಸೇರಿಸಿ",
+      "dangerZone": "ಅಪಾಯಕಾರಿ ವಲಯ",
+      "downloadData": "ನನ್ನ ಡೇಟಾ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
+      "deleteAccount": "ಖಾತೆ ಅಳಿಸಿ"
+    }
+  },
+  "notifications": {
+    "title": "ನೋಟಿಫಿಕೇಶನ್‌ಗಳು",
+    "markAllRead": "ಎಲ್ಲವನ್ನೂ ಓದಿದಂತೆ ಗುರುತಿಸಿ",
+    "clearAll": "ಎಲ್ಲವನ್ನೂ ತೆರವುಗೊಳಿಸಿ",
+    "noNotifications": "ನೋಟಿಫಿಕೇಶನ್‌ಗಳಿಲ್ಲ",
+    "newBid": "ಹೊಸ ಬಿಡ್ ಬಂದಿದೆ",
+    "bidAccepted": "ಬಿಡ್ ಸ್ವೀಕರಿಸಲಾಗಿದೆ",
+    "bidRejected": "ಬಿಡ್ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ",
+    "newMessage": "ಹೊಸ ಸಂದೇಶ",
+    "priceAlert": "ಬೆಲೆ ಎಚ್ಚರಿಕೆ",
+    "listingExpired": "ಪಟ್ಟಿ ಅವಧಿ ಮುಗಿದಿದೆ"
+  },
+  "crops": {
+    "rice": "ಅಕ್ಕಿ",
+    "wheat": "ಗೋಧಿ",
+    "cotton": "ಹತ್ತಿ",
+    "sugarcane": "ಕಬ್ಬು",
+    "maize": "ಮೆಕ್ಕೆಜೋಳ",
+    "soybeans": "ಸೋಯಾಬೀನ್ಸ್",
+    "groundnut": "ಕಡಲೆಕಾಯಿ",
+    "onion": "ಈರುಳ್ಳಿ",
+    "potato": "ಆಲೂಗಡ್ಡೆ",
+    "tomato": "ಟೊಮೆಟೊ",
+    "pulses": "ಬೇಳೆಕಾಳುಗಳು",
+    "vegetables": "ತರಕಾರಿಗಳು",
+    "fruits": "ಹಣ್ಣುಗಳು",
+    "spices": "ಮಸಾಲೆಗಳು",
+    "oilseeds": "ಎಣ್ಣೆಕಾಳುಗಳು"
+  },
+  "quality": {
+    "premium": "ಪ್ರೀಮಿಯಂ",
+    "grade_a": "ಗ್ರೇಡ್ A",
+    "grade_b": "ಗ್ರೇಡ್ B",
+    "standard": "ಸ್ಟ್ಯಾಂಡರ್ಡ್"
+  },
+  "units": {
+    "quintal": "ಕ್ವಿಂಟಾಲ್",
+    "kg": "ಕಿಲೋಗ್ರಾಂ",
+    "ton": "ಟನ್",
+    "rupees": "₹",
+    "perQuintal": "ಕ್ವಿಂಟಾಲ್‌ಗೆ"
+  },
+  "ai": {
+    "assistant": "AI ಸಹಾಯಕ",
+    "askQuestion": "ಕೃಷಿ, ಬೆಲೆಗಳು ಅಥವಾ ಮಾರುಕಟ್ಟೆಗಳ ಬಗ್ಗೆ ಪ್ರಶ್ನೆ ಕೇಳಿ...",
+    "thinking": "ಯೋಚಿಸುತ್ತಿದೆ...",
+    "pricePrediction": "ಬೆಲೆ ಮುನ್ಸೂಚನೆ",
+    "cropRecommendation": "ಬೆಳೆ ಶಿಫಾರಸು",
+    "marketAnalysis": "ಮಾರುಕಟ್ಟೆ ವಿಶ್ಲೇಷಣೆ",
+    "smartSuggestion": "ಸ್ಮಾರ್ಟ್ ಸಲಹೆ"
+  },
+  "auth": {
+    "signIn": "ಸೈನ್ ಇನ್",
+    "signUp": "ಸೈನ್ ಅಪ್",
+    "signInWithGoogle": "Googleನೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    "signOut": "ಸೈನ್ ಔಟ್",
+    "welcomeBack": "ಮರಳಿ ಸ್ವಾಗತ!",
+    "createAccount": "ನಿಮ್ಮ ಖಾತೆ ರಚಿಸಿ",
+    "continueWithGoogle": "Googleನೊಂದಿಗೆ ಮುಂದುವರಿಸಿ"
+  },
+  "footer": {
+    "about": "ಆಗ್ರೋಪಲ್ಸ್ ಬಗ್ಗೆ",
+    "contact": "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+    "privacy": "ಗೌಪ್ಯತಾ ನೀತಿ",
+    "terms": "ಸೇವಾ ನಿಯಮಗಳು",
+    "help": "ಸಹಾಯ ಕೇಂದ್ರ",
+    "copyright": "© 2024 ಆಗ್ರೋಪಲ್ಸ್. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
+  }
+}

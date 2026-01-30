@@ -8,35 +8,106 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-  
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// ==================== ENUMS ====================
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
+enum UserRole {
+    FARMER
+    BUYER
+    ADMIN
 }
 
-// Necessary for Next auth
+enum CropStatus {
+    ACTIVE
+    SOLD
+    EXPIRED
+    CANCELLED
+}
+
+enum BidStatus {
+    PENDING
+    ACCEPTED
+    REJECTED
+    EXPIRED
+}
+
+enum CropCategory {
+    GRAINS
+    VEGETABLES
+    FRUITS
+    PULSES
+    OILSEEDS
+    SPICES
+    OTHER
+}
+
+// ==================== USER & AUTH ====================
+
+model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String    @unique
+    emailVerified DateTime?
+    image         String?
+    password      String?
+    phone         String?
+    role          UserRole  @default(FARMER)
+    
+    // Location fields
+    address       String?
+    city          String?
+    state         String?
+    pincode       String?
+    latitude      Float?
+    longitude     Float?
+    
+    // Trust & ratings
+    trustScore    Float     @default(0)
+    totalRatings  Int       @default(0)
+    avgRating     Float     @default(0)
+    
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+
+    // Relations
+    accounts      Account[]
+    sessions      Session[]
+    
+    // Farmer relations
+    cropListings  CropListing[]
+    
+    // Buyer relations
+    bids          Bid[]
+    
+    // Messages
+    sentMessages     Message[] @relation("SentMessages")
+    receivedMessages Message[] @relation("ReceivedMessages")
+    
+    // Ratings
+    ratingsGiven    Rating[] @relation("RatingsGiven")
+    ratingsReceived Rating[] @relation("RatingsReceived")
+    
+    // Notifications
+    notifications   Notification[]
+
+    @@index([role])
+    @@index([city, state])
+}
+
 model Account {
     id                       String  @id @default(cuid())
     userId                   String
     type                     String
     provider                 String
     providerAccountId        String
-    refresh_token            String? // @db.Text
-    access_token             String? // @db.Text
+    refresh_token            String? @db.Text
+    access_token             String? @db.Text
     expires_at               Int?
     token_type               String?
     scope                    String?
-    id_token                 String? // @db.Text
+    id_token                 String? @db.Text
     session_state            String?
     user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     refresh_token_expires_in Int?
@@ -52,21 +123,204 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    posts         Post[]
-}
-
 model VerificationToken {
     identifier String
     token      String   @unique
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+// ==================== CROP LISTINGS ====================
+
+model CropListing {
+    id              String       @id @default(cuid())
+    farmerId        String
+    farmer          User         @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+    
+    // Crop details
+    cropName        String
+    category        CropCategory
+    quantity        Float        // in quintals
+    unit            String       @default("quintal")
+    expectedPrice   Float        // price per unit
+    minPrice        Float?       // minimum acceptable price
+    description     String?      @db.Text
+    
+    // Quality & certification
+    qualityGrade    String?
+    isCertified     Boolean      @default(false)
+    certifications  String[]
+    
+    // Images
+    images          String[]
+    
+    // Location (can differ from farmer's default)
+    harvestLocation String?
+    harvestDate     DateTime?
+    
+    // Listing status
+    status          CropStatus   @default(ACTIVE)
+    expiresAt       DateTime?
+    
+    // AI predictions (stored from external API)
+    aiPredictedPrice    Float?
+    aiSellTimeSuggestion String?
+    aiConfidenceScore   Float?
+    
+    createdAt       DateTime     @default(now())
+    updatedAt       DateTime     @updatedAt
+    
+    // Relations
+    bids            Bid[]
+    
+    @@index([farmerId])
+    @@index([cropName])
+    @@index([category])
+    @@index([status])
+    @@index([createdAt])
+}
+
+// ==================== BIDDING ====================
+
+model Bid {
+    id            String    @id @default(cuid())
+    listingId     String
+    listing       CropListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+    buyerId       String
+    buyer         User      @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+    
+    // Bid details
+    bidAmount     Float     // price per unit
+    quantity      Float     // quantity requested
+    totalAmount   Float     // bidAmount * quantity
+    message       String?   @db.Text
+    
+    status        BidStatus @default(PENDING)
+    
+    // Timestamps
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+    expiresAt     DateTime?
+    
+    @@index([listingId])
+    @@index([buyerId])
+    @@index([status])
+    @@index([createdAt])
+}
+
+// ==================== MESSAGING ====================
+
+model Message {
+    id          String   @id @default(cuid())
+    senderId    String
+    sender      User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+    receiverId  String
+    receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+    
+    content     String   @db.Text
+    isRead      Boolean  @default(false)
+    
+    createdAt   DateTime @default(now())
+    
+    @@index([senderId])
+    @@index([receiverId])
+    @@index([createdAt])
+}
+
+// ==================== RATINGS ====================
+
+model Rating {
+    id          String   @id @default(cuid())
+    raterId     String
+    rater       User     @relation("RatingsGiven", fields: [raterId], references: [id], onDelete: Cascade)
+    ratedUserId String
+    ratedUser   User     @relation("RatingsReceived", fields: [ratedUserId], references: [id], onDelete: Cascade)
+    
+    rating      Int      // 1-5
+    review      String?  @db.Text
+    
+    createdAt   DateTime @default(now())
+    
+    @@unique([raterId, ratedUserId])
+    @@index([ratedUserId])
+}
+
+// ==================== MARKET DATA ====================
+
+model MandiPrice {
+    id          String   @id @default(cuid())
+    cropName    String
+    variety     String?
+    
+    // Market info
+    mandiName   String
+    state       String
+    district    String
+    
+    // Prices
+    minPrice    Float
+    maxPrice    Float
+    modalPrice  Float    // most common price
+    
+    // Date of price
+    priceDate   DateTime
+    
+    createdAt   DateTime @default(now())
+    
+    @@index([cropName])
+    @@index([state, district])
+    @@index([priceDate])
+}
+
+// ==================== AI PREDICTIONS CACHE ====================
+
+model AIPrediction {
+    id              String   @id @default(cuid())
+    cropName        String
+    state           String
+    district        String?
+    
+    predictedPrice  Float
+    confidence      Float
+    sellTimeSuggestion String?
+    factors         Json?    // Factors influencing the prediction
+    
+    validUntil      DateTime
+    createdAt       DateTime @default(now())
+    
+    @@index([cropName, state])
+    @@index([validUntil])
+}
+
+// ==================== NOTIFICATIONS ====================
+
+enum NotificationType {
+    BID_RECEIVED
+    BID_ACCEPTED
+    BID_REJECTED
+    MESSAGE_RECEIVED
+    PRICE_ALERT
+    LISTING_EXPIRED
+    PAYMENT_RECEIVED
+    SYSTEM
+}
+
+model Notification {
+    id          String           @id @default(cuid())
+    userId      String
+    user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+    
+    type        NotificationType
+    title       String
+    message     String
+    link        String?          // Optional link to navigate to
+    data        Json?            // Additional data
+    
+    isRead      Boolean          @default(false)
+    createdAt   DateTime         @default(now())
+    
+    @@index([userId])
+    @@index([isRead])
+    @@index([createdAt])
 }

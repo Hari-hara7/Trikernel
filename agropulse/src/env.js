@@ -11,9 +11,10 @@ export const env = createEnv({
       process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
-    AUTH_DISCORD_ID: z.string(),
-    AUTH_DISCORD_SECRET: z.string(),
     DATABASE_URL: z.string().url(),
+    GEMINI_API_KEY: z.string().optional(),
+    AGMARKET_API_URL: z.string().url().optional(),
+    AGMARKET_API_KEY: z.string().optional(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -25,7 +26,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_APP_URL: z.string().url().optional(),
   },
 
   /**
@@ -34,10 +35,12 @@ export const env = createEnv({
    */
   runtimeEnv: {
     AUTH_SECRET: process.env.AUTH_SECRET,
-    AUTH_DISCORD_ID: process.env.AUTH_DISCORD_ID,
-    AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+    AGMARKET_API_URL: process.env.AGMARKET_API_URL,
+    AGMARKET_API_KEY: process.env.AGMARKET_API_KEY,
     NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

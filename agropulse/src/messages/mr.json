@@ -1,0 +1,252 @@
+{
+  "common": {
+    "welcome": "स्वागत आहे",
+    "loading": "लोड होत आहे...",
+    "save": "जतन करा",
+    "cancel": "रद्द करा",
+    "delete": "हटवा",
+    "edit": "संपादित करा",
+    "submit": "सबमिट करा",
+    "search": "शोधा",
+    "close": "बंद करा",
+    "back": "मागे",
+    "next": "पुढे",
+    "previous": "मागील",
+    "yes": "होय",
+    "no": "नाही",
+    "confirm": "पुष्टी करा",
+    "success": "यशस्वी",
+    "error": "त्रुटी",
+    "warning": "इशारा",
+    "info": "माहिती",
+    "viewAll": "सर्व पहा",
+    "seeMore": "अधिक पहा",
+    "learnMore": "अधिक जाणून घ्या"
+  },
+  "nav": {
+    "home": "मुख्यपृष्ठ",
+    "dashboard": "डॅशबोर्ड",
+    "myListings": "माझ्या याद्या",
+    "browse": "पिके शोधा",
+    "market": "बाजार भाव",
+    "messages": "संदेश",
+    "myBids": "माझ्या बोली",
+    "matchmaking": "AI मॅचमेकिंग",
+    "profile": "प्रोफाइल",
+    "settings": "सेटिंग्ज",
+    "logout": "लॉग आउट",
+    "login": "लॉग इन",
+    "register": "नोंदणी"
+  },
+  "dashboard": {
+    "title": "डॅशबोर्ड",
+    "welcomeBack": "पुन्हा स्वागत",
+    "overview": "आढावा",
+    "recentActivity": "अलीकडील क्रियाकलाप",
+    "quickActions": "जलद क्रिया",
+    "stats": {
+      "totalListings": "एकूण याद्या",
+      "activeListings": "सक्रिय याद्या",
+      "pendingBids": "प्रलंबित बोली",
+      "completedDeals": "पूर्ण व्यवहार",
+      "totalRevenue": "एकूण महसूल",
+      "averageRating": "सरासरी रेटिंग"
+    }
+  },
+  "listings": {
+    "title": "माझ्या याद्या",
+    "createNew": "नवीन यादी तयार करा",
+    "editListing": "यादी संपादित करा",
+    "cropName": "पिकाचे नाव",
+    "quantity": "प्रमाण",
+    "pricePerQuintal": "प्रति क्विंटल किंमत",
+    "location": "स्थान",
+    "harvestDate": "कापणी तारीख",
+    "description": "वर्णन",
+    "quality": "गुणवत्ता दर्जा",
+    "status": {
+      "active": "सक्रिय",
+      "sold": "विकले",
+      "expired": "कालबाह्य",
+      "pending": "प्रलंबित"
+    },
+    "noListings": "तुमच्याकडे अजून कोणत्याही याद्या नाहीत",
+    "createFirst": "विक्री सुरू करण्यासाठी तुमची पहिली यादी तयार करा"
+  },
+  "browse": {
+    "title": "पिके शोधा",
+    "searchPlaceholder": "पिके शोधा...",
+    "filters": "फिल्टर्स",
+    "sortBy": "क्रमवारी",
+    "priceRange": "किंमत श्रेणी",
+    "cropType": "पिक प्रकार",
+    "location": "स्थान",
+    "quality": "गुणवत्ता",
+    "noResults": "तुमच्या निकषांशी जुळणारी पिके सापडली नाहीत",
+    "adjustFilters": "तुमचे फिल्टर्स समायोजित करून पहा"
+  },
+  "market": {
+    "title": "बाजार भाव",
+    "subtitle": "AI-संचालित रिअल-टाइम बाजार माहिती",
+    "mandiPrices": "मंडी भाव",
+    "priceAnalysis": "किंमत विश्लेषण",
+    "predictions": "किंमत अंदाज",
+    "trends": "बाजार ट्रेंड",
+    "todayPrice": "आजचा भाव",
+    "avgPrice": "सरासरी किंमत",
+    "minPrice": "किमान किंमत",
+    "maxPrice": "कमाल किंमत",
+    "change": "बदल",
+    "aiRecommendation": "AI शिफारस",
+    "bestTimeToSell": "विक्रीसाठी सर्वोत्तम वेळ",
+    "priceAlert": "किंमत अलर्ट सेट करा"
+  },
+  "bids": {
+    "title": "बोली",
+    "myBids": "माझ्या बोली",
+    "receivedBids": "प्राप्त बोली",
+    "placeBid": "बोली लावा",
+    "acceptBid": "बोली स्वीकारा",
+    "rejectBid": "बोली नाकारा",
+    "counterOffer": "प्रतिऑफर",
+    "bidAmount": "बोली रक्कम",
+    "bidStatus": {
+      "pending": "प्रलंबित",
+      "accepted": "स्वीकृत",
+      "rejected": "नाकारले",
+      "countered": "प्रतिऑफर",
+      "expired": "कालबाह्य"
+    },
+    "noBids": "अजून बोली नाहीत",
+    "bidPlaced": "तुमची बोली यशस्वीरित्या लावली गेली"
+  },
+  "messages": {
+    "title": "संदेश",
+    "newMessage": "नवीन संदेश",
+    "typeMessage": "तुमचा संदेश टाइप करा...",
+    "send": "पाठवा",
+    "noConversations": "अजून संवाद नाहीत",
+    "startConversation": "खरेदीदार किंवा विक्रेत्याशी संवाद सुरू करा",
+    "searchUsers": "वापरकर्ते शोधा..."
+  },
+  "matchmaking": {
+    "title": "AI मॅचमेकिंग",
+    "subtitle": "तुमच्या पिकांसाठी योग्य खरेदीदार शोधा",
+    "findBuyers": "खरेदीदार शोधा",
+    "findSellers": "विक्रेते शोधा",
+    "matchScore": "मॅच स्कोर",
+    "compatibility": "सुसंगतता",
+    "connect": "कनेक्ट करा",
+    "noMatches": "जुळणी सापडली नाही",
+    "tryAgain": "तुमच्या प्राधान्यांमध्ये बदल करून पहा"
+  },
+  "profile": {
+    "title": "प्रोफाइल सेटिंग्ज",
+    "subtitle": "तुमच्या खात्याच्या सेटिंग्ज आणि प्राधान्ये व्यवस्थापित करा",
+    "personalInfo": "वैयक्तिक माहिती",
+    "updateDetails": "तुमचा वैयक्तिक तपशील आणि प्राधान्ये अपडेट करा",
+    "fullName": "पूर्ण नाव",
+    "email": "ईमेल पत्ता",
+    "phone": "फोन नंबर",
+    "location": "स्थान",
+    "aboutMe": "माझ्याबद्दल",
+    "farmDetails": "शेत तपशील",
+    "farmSize": "शेताचा आकार",
+    "specializations": "विशेषज्ञता",
+    "notifications": {
+      "title": "सूचना प्राधान्ये",
+      "subtitle": "तुम्हाला सूचना कशा मिळवायच्या ते निवडा",
+      "email": "ईमेल सूचना",
+      "push": "पुश सूचना",
+      "sms": "SMS सूचना",
+      "bidAlerts": "बोली अलर्ट",
+      "priceAlerts": "किंमत अलर्ट",
+      "messageAlerts": "संदेश अलर्ट"
+    },
+    "language": {
+      "title": "भाषा सेटिंग्ज",
+      "subtitle": "अॅप्लिकेशनसाठी तुमची पसंतीची भाषा निवडा",
+      "note": "भाषा बदलल्याने संपूर्ण अॅप्लिकेशन इंटरफेस भाषांतरित होईल."
+    },
+    "security": {
+      "title": "सुरक्षा सेटिंग्ज",
+      "subtitle": "तुमच्या खात्याची सुरक्षा आणि गोपनीयता व्यवस्थापित करा",
+      "verified": "खाते सत्यापित",
+      "connectedAccounts": "कनेक्टेड खाती",
+      "paymentMethods": "पेमेंट पद्धती",
+      "noPaymentMethods": "पेमेंट पद्धत जोडली नाही",
+      "addPaymentMethod": "पेमेंट पद्धत जोडा",
+      "dangerZone": "धोकादायक क्षेत्र",
+      "downloadData": "माझा डेटा डाउनलोड करा",
+      "deleteAccount": "खाते हटवा"
+    }
+  },
+  "notifications": {
+    "title": "सूचना",
+    "markAllRead": "सर्व वाचले म्हणून चिन्हांकित करा",
+    "clearAll": "सर्व साफ करा",
+    "noNotifications": "सूचना नाहीत",
+    "newBid": "नवीन बोली प्राप्त",
+    "bidAccepted": "बोली स्वीकृत",
+    "bidRejected": "बोली नाकारली",
+    "newMessage": "नवीन संदेश",
+    "priceAlert": "किंमत अलर्ट",
+    "listingExpired": "यादी कालबाह्य"
+  },
+  "crops": {
+    "rice": "तांदूळ",
+    "wheat": "गहू",
+    "cotton": "कापूस",
+    "sugarcane": "ऊस",
+    "maize": "मका",
+    "soybeans": "सोयाबीन",
+    "groundnut": "भुईमूग",
+    "onion": "कांदा",
+    "potato": "बटाटा",
+    "tomato": "टोमॅटो",
+    "pulses": "कडधान्ये",
+    "vegetables": "भाज्या",
+    "fruits": "फळे",
+    "spices": "मसाले",
+    "oilseeds": "तेलबिया"
+  },
+  "quality": {
+    "premium": "प्रीमियम",
+    "grade_a": "ग्रेड A",
+    "grade_b": "ग्रेड B",
+    "standard": "मानक"
+  },
+  "units": {
+    "quintal": "क्विंटल",
+    "kg": "किलोग्राम",
+    "ton": "टन",
+    "rupees": "₹",
+    "perQuintal": "प्रति क्विंटल"
+  },
+  "ai": {
+    "assistant": "AI सहाय्यक",
+    "askQuestion": "शेती, किंमती किंवा बाजाराबद्दल प्रश्न विचारा...",
+    "thinking": "विचार करत आहे...",
+    "pricePrediction": "किंमत अंदाज",
+    "cropRecommendation": "पीक शिफारस",
+    "marketAnalysis": "बाजार विश्लेषण",
+    "smartSuggestion": "स्मार्ट सूचना"
+  },
+  "auth": {
+    "signIn": "साइन इन करा",
+    "signUp": "साइन अप करा",
+    "signInWithGoogle": "Google ने साइन इन करा",
+    "signOut": "साइन आउट करा",
+    "welcomeBack": "पुन्हा स्वागत!",
+    "createAccount": "तुमचे खाते तयार करा",
+    "continueWithGoogle": "Google सह सुरू ठेवा"
+  },
+  "footer": {
+    "about": "एग्रोपल्स बद्दल",
+    "contact": "संपर्क करा",
+    "privacy": "गोपनीयता धोरण",
+    "terms": "सेवा अटी",
+    "help": "मदत केंद्र",
+    "copyright": "© 2024 एग्रोपल्स. सर्व हक्क राखीव."
+  }
+}
