@@ -1,9 +1,9 @@
 {
-  "buildCommand": "npm run build || true",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
   "outputDirectory": ".next",
-  "env": {
-    "NODE_ENV": "production"
-  },
+  "framework": "nextjs",
+  "nodeVersion": "20.x",
   "headers": [
     {
       "source": "/service-worker.js",
@@ -22,6 +22,22 @@
           "value": "application/manifest+json"
         }
       ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/auth/:path*",
+      "destination": "/login",
+      "permanent": false
     }
   ]
 }
