@@ -7,11 +7,28 @@ import { Geist, Noto_Sans_Devanagari, Noto_Sans_Telugu, Noto_Sans_Tamil, Noto_Sa
 import { TRPCReactProvider } from "~/trpc/react";
 import { LanguageProvider } from "~/providers/language-provider";
 import { defaultLocale } from "~/i18n";
+import { ServiceWorkerRegistration } from "~/components/service-worker-registration";
 
 export const metadata: Metadata = {
   title: "AgroPulse - Agricultural Marketplace",
   description: "AI-powered agricultural marketplace connecting farmers with buyers",
+  manifest: "/manifest.json",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "AgroPulse",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: "cover",
+  },
 };
 
 const geist = Geist({
@@ -89,9 +106,17 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={fontClass}>
+      <head>
+        <meta name="theme-color" content="#10b981" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="AgroPulse" />
+      </head>
       <body>
         <TRPCReactProvider>
           <LanguageProvider>
+            <ServiceWorkerRegistration />
             {children}
           </LanguageProvider>
         </TRPCReactProvider>

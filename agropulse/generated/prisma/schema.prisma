@@ -283,6 +283,7 @@ model MandiPrice {
 
   createdAt DateTime @default(now())
 
+  @@unique([cropName, variety, mandiName, priceDate])
   @@index([cropName])
   @@index([state, district])
   @@index([priceDate])

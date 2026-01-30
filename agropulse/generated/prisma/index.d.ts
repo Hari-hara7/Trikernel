@@ -18643,6 +18643,7 @@ export namespace Prisma {
 
   export type MandiPriceWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    cropName_variety_mandiName_priceDate?: MandiPriceCropNameVarietyMandiNamePriceDateCompoundUniqueInput
     AND?: MandiPriceWhereInput | MandiPriceWhereInput[]
     OR?: MandiPriceWhereInput[]
     NOT?: MandiPriceWhereInput | MandiPriceWhereInput[]
@@ -18656,7 +18657,7 @@ export namespace Prisma {
     modalPrice?: FloatFilter<"MandiPrice"> | number
     priceDate?: DateTimeFilter<"MandiPrice"> | Date | string
     createdAt?: DateTimeFilter<"MandiPrice"> | Date | string
-  }, "id">
+  }, "id" | "cropName_variety_mandiName_priceDate">
 
   export type MandiPriceOrderByWithAggregationInput = {
     id?: SortOrder
@@ -21094,6 +21095,13 @@ export namespace Prisma {
 
   export type RatingSumOrderByAggregateInput = {
     rating?: SortOrder
+  }
+
+  export type MandiPriceCropNameVarietyMandiNamePriceDateCompoundUniqueInput = {
+    cropName: string
+    variety: string
+    mandiName: string
+    priceDate: Date | string
   }
 
   export type MandiPriceCountOrderByAggregateInput = {

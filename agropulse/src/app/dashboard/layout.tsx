@@ -5,6 +5,8 @@ import { auth } from "~/server/auth";
 import { DashboardNav } from "~/components/dashboard/nav";
 import { Toaster } from "~/components/ui/toaster";
 import { LanguageProvider } from "~/providers/language-provider";
+import { OfflineIndicator } from "~/components/offline-indicator";
+import { DraftManager } from "~/components/draft-manager";
 
 export default async function DashboardLayout({
   children,
@@ -31,6 +33,8 @@ export default async function DashboardLayout({
           </main>
           
           <Toaster />
+          <OfflineIndicator />
+          <DraftManager />
         </div>
       </LanguageProvider>
     </SessionProvider>

@@ -367,7 +367,46 @@ Simple, mobile-first UI with regional language readiness and future voice-based 
 - **Market Data Export**: Download for external analysis
 - **Trend Analysis**: Visualize price trends over time
 
-### 🔐 **Security & Privacy Features**
+### � **Offline Support & PWA Features**
+- **Progressive Web App (PWA)**: Install AgroPulse as a standalone app
+  - Add to home screen on mobile and desktop
+  - Offline access to previously loaded content
+  - Fast loading with service worker caching
+  - Works without constant internet connection
+- **Offline Messaging**: Draft and queue messages while offline
+  - Messages automatically sync when reconnected
+  - View draft history and pending messages
+  - Draft manager shows all pending actions
+- **Offline Listing Creation**: Create crop listings offline
+  - Save listing drafts locally
+  - Submit to server when internet returns
+  - Automatic sync with status tracking
+- **Cached Data Access**: View previously loaded information
+  - Browse cached crop listings
+  - View historical market prices
+  - Access cached conversations
+  - Smart cache expiration (default 60 minutes)
+- **Service Worker**: Advanced caching strategy
+  - Network-first for API calls (fallback to cache)
+  - Cache-first for static assets
+  - Background sync for queued actions
+  - Automatic data sync on reconnection
+- **Offline Indicators**: Visual feedback about connectivity
+  - Real-time online/offline status
+  - Pending action count display
+  - Sync status notifications
+  - Draft manager with pending items count
+- **App Shortcuts**: Quick access to key features
+  - Browse Crops shortcut
+  - My Listings shortcut
+  - Messages shortcut
+- **Installable**: Full PWA capabilities
+  - Home screen icon with custom app name
+  - Standalone app experience
+  - Web app manifest configuration
+  - iOS support with custom meta tags
+
+### �🔐 **Security & Privacy Features**
 - **Data Encryption**: Secure transmission of sensitive data
 - **Session Management**: Automatic logout on inactivity
 - **Audit Logs**: Track important account activities

@@ -126,7 +126,6 @@ export async function syncMandiPricesToDatabase(params?: {
               minPrice: parseFloat(record.min_price) || 0,
               maxPrice: parseFloat(record.max_price) || 0,
               modalPrice: parseFloat(record.modal_price) || 0,
-              updatedAt: new Date(),
             },
             create: {
               cropName: record.commodity,
@@ -202,7 +201,7 @@ export async function getMandiPricesWithFallback(params?: {
   // Check if cache is stale (older than 6 hours)
   const latestPrice = cachedPrices[0];
   const isStale = !latestPrice || 
-    (new Date().getTime() - new Date(latestPrice.updatedAt).getTime()) > 6 * 60 * 60 * 1000;
+    (new Date().getTime() - new Date(latestPrice.createdAt).getTime()) > 6 * 60 * 60 * 1000;
 
   if (isStale) {
     // Try to fetch fresh data
@@ -241,9 +240,10 @@ export async function getMandiPricesWithFallback(params?: {
   return {
     prices: cachedPrices.map((price) => ({
       ...price,
+      variety: price.variety || "Regular",
       source: "cached" as const,
     })),
-    lastUpdated: latestPrice?.updatedAt ?? null,
+    lastUpdated: latestPrice?.createdAt ?? null,
   };
 }
 
