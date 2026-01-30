@@ -127,7 +127,6 @@ Simple, mobile-first UI with regional language readiness and future voice-based 
 ---
 
 ## 🚀 Setup Instructions
-
 ### Prerequisites
 
 - **Node.js** (v18+)
