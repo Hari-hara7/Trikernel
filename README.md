@@ -13,6 +13,7 @@
 
 | Field | Details |
 |-------|---------|
+| **Project Name** | AgroPulse |
 | **Problem Statement ID** | CS03AE |
 | **Team Name** | Trikernel |
 | **College** | NMAMIT |
@@ -137,7 +138,7 @@ Simple, mobile-first UI with regional language readiness and future voice-based 
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone <https://github.com/Terkernel/AgroPulse.git>
 cd agropulse
 
 # Install dependencies
