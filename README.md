@@ -523,5 +523,5 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 ---
 
 <p align="center">
-  Made with ❤️ by <strong>Team Trikernel</strong> | NMAMIT
+  Made with ❤️ by <strong>Team Trikernel of Hari, Saniya & Fragan</strong> | NMAMIT
 </p>
