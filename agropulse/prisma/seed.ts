@@ -10,7 +10,7 @@ async function main() {
   });
 
   if (!mainUser) {
-    console.log("❌ Main user not found. Creating...");
+    console.log(" Main user not found. Creating...");
     await prisma.user.create({
       data: {
         id: MAIN_USER_ID,
@@ -25,12 +25,12 @@ async function main() {
         totalRatings: 12,
       },
     });
-    console.log("✅ Main user created");
+    console.log(" Main user created");
   } else {
-    console.log(`✅ Main user found: ${mainUser.name} (${mainUser.role})`);
+    console.log(` Main user found: ${mainUser.name} (${mainUser.role})`);
   }
 
-  console.log("\n👥 Creating additional users...");
+  console.log("\n Creating additional users...");
   const additionalUsers = [
     
     {
