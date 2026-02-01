@@ -86,14 +86,13 @@ model User {
     sentMessages     Message[] @relation("SentMessages")
     receivedMessages Message[] @relation("ReceivedMessages")
     
-    // Ratings
     ratingsGiven    Rating[] @relation("RatingsGiven")
     ratingsReceived Rating[] @relation("RatingsReceived")
     
-    // Notifications
+    
     notifications   Notification[]
     
-    // Audit logs
+ 
     auditLogs      AuditLog[]
     
     blockchainTransactions BlockchainTransaction[]
@@ -137,14 +136,12 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-// ==================== CROP LISTINGS ====================
 
 model CropListing {
     id              String       @id @default(cuid())
     farmerId        String
     farmer          User         @relation(fields: [farmerId], references: [id], onDelete: Cascade)
     
-    // Crop details
     cropName        String
     category        CropCategory
     quantity        Float        // in quintals
@@ -153,23 +150,19 @@ model CropListing {
     minPrice        Float?       // minimum acceptable price
     description     String?      @db.Text
     
-    // Quality & certification
     qualityGrade    String?
     isCertified     Boolean      @default(false)
     certifications  String[]
     
-    // Images
+    
     images          String[]
     
-    // Location (can differ from farmer's default)
     harvestLocation String?
     harvestDate     DateTime?
     
-    // Listing status
     status          CropStatus   @default(ACTIVE)
     expiresAt       DateTime?
     
-    // AI predictions (stored from external API)
     aiPredictedPrice    Float?
     aiSellTimeSuggestion String?
     aiConfidenceScore   Float?
@@ -177,7 +170,6 @@ model CropListing {
     createdAt       DateTime     @default(now())
     updatedAt       DateTime     @updatedAt
     
-    // Relations
     bids            Bid[]
     
     @@index([farmerId])
@@ -187,7 +179,6 @@ model CropListing {
     @@index([createdAt])
 }
 
-// ==================== BIDDING ====================
 
 model Bid {
     id            String    @id @default(cuid())
@@ -196,15 +187,14 @@ model Bid {
     buyerId       String
     buyer         User      @relation(fields: [buyerId], references: [id], onDelete: Cascade)
     
-    // Bid details
-    bidAmount     Float     // price per unit
-    quantity      Float     // quantity requested
-    totalAmount   Float     // bidAmount * quantity
+    bidAmount     Float     
+    quantity      Float     
+    totalAmount   Float     
     message       String?   @db.Text
     
     status        BidStatus @default(PENDING)
     
-    // Timestamps
+   
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
     expiresAt     DateTime?
@@ -215,7 +205,6 @@ model Bid {
     @@index([createdAt])
 }
 
-// ==================== MESSAGING ====================
 
 model Message {
     id          String   @id @default(cuid())
@@ -234,7 +223,6 @@ model Message {
     @@index([createdAt])
 }
 
-// ==================== RATINGS ====================
 
 model Rating {
     id          String   @id @default(cuid())
@@ -252,12 +240,11 @@ model Rating {
     @@index([ratedUserId])
 }
 
-// ==================== MARKET DATA ====================
 
 model MandiPrice {
     id          String   @id @default(cuid())
     cropName    String
-    variety     String?   // Made optional for legacy data
+    variety     String?   
     
     // Market info
     mandiName   String
@@ -267,7 +254,7 @@ model MandiPrice {
     // Prices
     minPrice    Float
     maxPrice    Float
-    modalPrice  Float    // most common price
+    modalPrice  Float    
     
     // Date of price
     priceDate   DateTime
@@ -280,7 +267,6 @@ model MandiPrice {
     @@index([priceDate])
 }
 
-// ==================== AI PREDICTIONS CACHE ====================
 
 model AIPrediction {
     id              String   @id @default(cuid())
@@ -291,7 +277,7 @@ model AIPrediction {
     predictedPrice  Float
     confidence      Float
     sellTimeSuggestion String?
-    factors         Json?    // Factors influencing the prediction
+    factors         Json?    
     
     validUntil      DateTime
     createdAt       DateTime @default(now())
@@ -300,7 +286,6 @@ model AIPrediction {
     @@index([validUntil])
 }
 
-// ==================== NOTIFICATIONS ====================
 
 enum NotificationType {
     BID_RECEIVED
@@ -321,8 +306,8 @@ model Notification {
     type        NotificationType
     title       String
     message     String
-    link        String?          // Optional link to navigate to
-    data        Json?            // Additional data
+    link        String?          
+    data        Json?            
     
     isRead      Boolean          @default(false)
     createdAt   DateTime         @default(now())
@@ -360,7 +345,7 @@ model AuditLog {
     user        User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
     
     action      AuditAction
-    details     Json        // Store additional context
+    details     Json       
     ipAddress   String?
     userAgent   String?
     
@@ -371,7 +356,6 @@ model AuditLog {
     @@index([createdAt])
 }
 
-// ==================== BLOCKCHAIN TRANSACTIONS ====================
 
 enum TransactionType {
     LISTING_CREATED
@@ -388,11 +372,11 @@ model BlockchainTransaction {
     user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
     
     transactionType   TransactionType
-    data              Json            // Transaction data
-    dataHash          String          // Hash of transaction data
-    blockHash         String          // Hash of the block
-    previousBlockHash String?         // Hash of previous block
-    nonce             Int             // Proof of work nonce
+    data              Json            
+    dataHash          String          
+    blockHash         String          
+    previousBlockHash String?         
+    nonce             Int             
     
     createdAt         DateTime        @default(now())
     
