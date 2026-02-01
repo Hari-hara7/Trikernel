@@ -90,12 +90,7 @@ Simple, mobile-first UI with regional language readiness and future voice-based 
 | **PostgreSQL** | Primary database |
 | **Neon** | Serverless PostgreSQL |
 
-### AI / ML
-| Technology | Purpose |
-|------------|---------|
-| **Python** | ML services |
-| **Time-series models** | Price prediction |
-| **Demand forecasting** | Market analysis |
+
 
 ### Real-Time Features
 - WebSockets / Server-Sent Events for live bidding and price updates
