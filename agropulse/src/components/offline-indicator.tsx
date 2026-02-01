@@ -1,4 +1,3 @@
-// Offline status indicator component
 
 'use client';
 

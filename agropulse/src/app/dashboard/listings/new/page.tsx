@@ -51,7 +51,7 @@ export default function NewListingPage() {
         description: "Your crop listing is now live.",
         variant: "success",
       });
-      // Redirect to listings page instead of non-existent detail page
+      
       router.push(`/dashboard/listings`);
     },
     onError: (error) => {
@@ -63,7 +63,7 @@ export default function NewListingPage() {
     },
   });
 
-  // AI Price Prediction (using profile data)
+  
   const { data: profile } = api.auth.getProfile.useQuery();
   const { data: prediction, isLoading: predictionLoading } = api.ai.getPricePrediction.useQuery(
     {
@@ -105,7 +105,7 @@ export default function NewListingPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      {/* Header */}
+     
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon" asChild>
           <Link href="/dashboard/listings">
@@ -119,7 +119,7 @@ export default function NewListingPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Info */}
+    
         <Card>
           <CardHeader>
             <CardTitle>Crop Details</CardTitle>
@@ -238,7 +238,7 @@ export default function NewListingPage() {
           </CardContent>
         </Card>
 
-        {/* Pricing */}
+        
         <Card>
           <CardHeader>
             <CardTitle>Pricing</CardTitle>
@@ -274,7 +274,7 @@ export default function NewListingPage() {
               </div>
             </div>
 
-            {/* AI Prediction Card */}
+            
             {formData.cropName && profile?.state && (
               <div className="p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/20">
                 <div className="flex items-center gap-2 mb-2">
@@ -316,7 +316,7 @@ export default function NewListingPage() {
           </CardContent>
         </Card>
 
-        {/* Submit */}
+       
         <div className="flex gap-3">
           <Button
             type="button"

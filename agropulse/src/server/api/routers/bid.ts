@@ -5,7 +5,7 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/
 import { BidStatus, CropStatus } from "../../../../generated/prisma";
 
 export const bidRouter = createTRPCRouter({
-  // Place a bid (Buyer only)
+
   create: protectedProcedure
     .input(
       z.object({
@@ -23,7 +23,7 @@ export const bidRouter = createTRPCRouter({
         });
       }
 
-      // Check if listing exists and is active
+      
       const listing = await ctx.db.cropListing.findUnique({
         where: { id: input.listingId },
         include: { farmer: true },
@@ -52,7 +52,7 @@ export const bidRouter = createTRPCRouter({
         });
       }
 
-      // Check if buyer already has an active bid on this listing
+     
       const existingBid = await ctx.db.bid.findFirst({
         where: {
           listingId: input.listingId,
@@ -62,7 +62,7 @@ export const bidRouter = createTRPCRouter({
       });
 
       if (existingBid) {
-        // Update existing bid
+        
         const updated = await ctx.db.bid.update({
           where: { id: existingBid.id },
           data: {
@@ -81,7 +81,7 @@ export const bidRouter = createTRPCRouter({
         return updated;
       }
 
-      // Create new bid
+      
       const bid = await ctx.db.bid.create({
         data: {
           listingId: input.listingId,
@@ -104,7 +104,7 @@ export const bidRouter = createTRPCRouter({
       return bid;
     }),
 
-  // Get all bids for a listing (with real-time updates support)
+  
   getForListing: publicProcedure
     .input(z.object({ listingId: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -128,7 +128,7 @@ export const bidRouter = createTRPCRouter({
       return bids;
     }),
 
-  // Get buyer's own bids
+  
   getMyBids: protectedProcedure
     .input(
       z.object({
@@ -169,7 +169,7 @@ export const bidRouter = createTRPCRouter({
       return bids;
     }),
 
-  // Accept a bid (Farmer only)
+  
   accept: protectedProcedure
     .input(z.object({ bidId: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -192,7 +192,7 @@ export const bidRouter = createTRPCRouter({
         });
       }
 
-      // Update bid status and reject other bids
+      
       await ctx.db.$transaction([
         ctx.db.bid.update({
           where: { id: input.bidId },
@@ -215,7 +215,7 @@ export const bidRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  // Reject a bid (Farmer only)
+  
   reject: protectedProcedure
     .input(z.object({ bidId: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -246,7 +246,7 @@ export const bidRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  // Cancel a bid (Buyer only)
+  
   cancel: protectedProcedure
     .input(z.object({ bidId: z.string() }))
     .mutation(async ({ ctx, input }) => {

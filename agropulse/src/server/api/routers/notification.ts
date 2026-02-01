@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import type { PrismaClient } from "../../../../generated/prisma";
 
-// Notification types enum matching Prisma schema
+
 type NotificationType = 
   | "BID_RECEIVED"
   | "BID_ACCEPTED"
@@ -15,7 +15,7 @@ type NotificationType =
   | "PAYMENT_RECEIVED"
   | "SYSTEM";
 
-// Helper function to create notifications
+
 export async function createNotification(
   db: PrismaClient,
   params: {
@@ -40,7 +40,7 @@ export async function createNotification(
 }
 
 export const notificationRouter = createTRPCRouter({
-  // Get all notifications for current user
+
   getAll: protectedProcedure
     .input(
       z.object({
@@ -72,7 +72,7 @@ export const notificationRouter = createTRPCRouter({
       };
     }),
 
-  // Get unread notification count
+ 
   getUnreadCount: protectedProcedure.query(async ({ ctx }) => {
     const count = await ctx.db.notification.count({
       where: {
@@ -84,7 +84,7 @@ export const notificationRouter = createTRPCRouter({
     return count;
   }),
 
-  // Mark a notification as read
+
   markAsRead: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -107,7 +107,7 @@ export const notificationRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  // Mark all notifications as read
+  
   markAllAsRead: protectedProcedure.mutation(async ({ ctx }) => {
     await ctx.db.notification.updateMany({
       where: {
@@ -120,7 +120,7 @@ export const notificationRouter = createTRPCRouter({
     return { success: true };
   }),
 
-  // Delete a notification
+  
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -142,7 +142,6 @@ export const notificationRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  // Delete all read notifications
   deleteAllRead: protectedProcedure.mutation(async ({ ctx }) => {
     await ctx.db.notification.deleteMany({
       where: {
@@ -154,7 +153,6 @@ export const notificationRouter = createTRPCRouter({
     return { success: true };
   }),
 
-  // Get recent notifications for header dropdown
   getRecent: protectedProcedure.query(async ({ ctx }) => {
     const notifications = await ctx.db.notification.findMany({
       where: { userId: ctx.session.user.id },
@@ -175,7 +173,7 @@ export const notificationRouter = createTRPCRouter({
     };
   }),
 
-  // Create a test notification (for testing purposes)
+
   createTest: protectedProcedure
     .input(z.object({
       type: z.enum([

@@ -1,7 +1,7 @@
 import { env } from "~/env";
 import { db } from "~/server/db";
 
-// Data.gov.in API response structure
+
 interface AgMarketRecord {
   state: string;
   district: string;

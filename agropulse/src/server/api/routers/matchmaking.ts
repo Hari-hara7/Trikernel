@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const matchmakingRouter = createTRPCRouter({
-  // Get smart matches for a farmer's listing
+
   getMatchesForListing: protectedProcedure
     .input(z.object({ listingId: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -30,10 +30,7 @@ export const matchmakingRouter = createTRPCRouter({
         });
       }
 
-      // Find potential buyers based on:
-      // 1. Location proximity (same state/city)
-      // 2. Trust score
-      // 3. Past bidding history on similar crops
+    
       const potentialBuyers = await ctx.db.user.findMany({
         where: {
           role: "BUYER",
@@ -66,7 +63,7 @@ export const matchmakingRouter = createTRPCRouter({
         take: 20,
       });
 
-      // Calculate match scores
+     
       const matches = potentialBuyers.map((buyer) => {
         let score = 0;
 
@@ -112,7 +109,7 @@ export const matchmakingRouter = createTRPCRouter({
       return matches.sort((a, b) => b.matchScore - a.matchScore);
     }),
 
-  // Get recommended listings for a buyer
+  
   getRecommendationsForBuyer: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.session.user.role !== "BUYER") {
       throw new TRPCError({

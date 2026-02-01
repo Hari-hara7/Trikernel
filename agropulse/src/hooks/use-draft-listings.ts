@@ -1,4 +1,4 @@
-// Draft listings management
+
 
 'use client';
 
@@ -11,7 +11,7 @@ export function useDraftListings() {
   const [drafts, setDrafts] = useState<PendingListing[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Load drafts from IndexedDB
+  
   const loadDrafts = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -24,7 +24,7 @@ export function useDraftListings() {
     }
   }, []);
 
-  // Save a draft listing
+ 
   const saveDraft = useCallback(
     async (
       cropName: string,
@@ -58,7 +58,7 @@ export function useDraftListings() {
     []
   );
 
-  // Delete a draft
+  
   const deleteDraft = useCallback(async (draftId: string) => {
     try {
       await deletePendingListing(draftId);
@@ -69,7 +69,7 @@ export function useDraftListings() {
     }
   }, []);
 
-  // Get all drafts
+  
   const getAllDrafts = useCallback(() => {
     return drafts;
   }, [drafts]);

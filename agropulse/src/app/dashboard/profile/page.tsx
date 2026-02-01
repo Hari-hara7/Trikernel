@@ -53,7 +53,6 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   
-  // Form state
   const [formData, setFormData] = useState<ProfileFormData>({
     name: session?.user?.name ?? "",
     phone: "",
@@ -63,7 +62,6 @@ export default function ProfilePage() {
     specializations: [],
   });
 
-  // Notification preferences
   const [notifications, setNotifications] = useState({
     email: true,
     push: true,
@@ -73,10 +71,10 @@ export default function ProfilePage() {
     messageAlerts: true,
   });
 
-  // Language preference
+  
   const [language, setLanguage] = useState("en");
 
-  // Mock statistics - in production these would come from API
+
   const stats = {
     totalListings: 12,
     activeBids: 5,
@@ -88,7 +86,7 @@ export default function ProfilePage() {
   };
 
   const handleSaveProfile = async () => {
-    // Here you would call an API to save the profile
+    
     toast({
       title: "Profile Updated",
       description: "Your profile has been successfully updated.",
@@ -127,17 +125,17 @@ export default function ProfilePage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+     
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Profile Settings</h1>
         <p className="text-gray-500">Manage your account settings and preferences</p>
       </div>
 
-      {/* Profile Overview Card */}
+    
       <Card className="border-0 shadow-lg bg-gradient-to-r from-green-600 to-green-700 text-white">
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row items-center gap-6">
-            {/* Profile Image */}
+           
             <div className="relative">
               <div className="w-28 h-28 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-4 border-white/30">
                 {profileImage || session?.user?.image ? (
@@ -163,7 +161,7 @@ export default function ProfilePage() {
               </label>
             </div>
 
-            {/* User Info */}
+          
             <div className="text-center md:text-left flex-1">
               <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
                 <h2 className="text-2xl font-bold">{session?.user?.name ?? "User"}</h2>
@@ -185,7 +183,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Quick Stats */}
+            
             <div className="grid grid-cols-3 gap-4 text-center">
               <div className="bg-white/10 rounded-lg p-3">
                 <Package className="w-5 h-5 mx-auto mb-1" />
@@ -207,7 +205,7 @@ export default function ProfilePage() {
         </CardContent>
       </Card>
 
-      {/* Tabs */}
+    
       <Tabs defaultValue="personal" className="w-full">
         <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:inline-flex">
           <TabsTrigger value="personal" className="gap-2">
@@ -228,7 +226,7 @@ export default function ProfilePage() {
           </TabsTrigger>
         </TabsList>
 
-        {/* Personal Info Tab */}
+        
         <TabsContent value="personal" className="mt-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
@@ -269,7 +267,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Email */}
+                
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
                   <div className="relative">
@@ -284,7 +282,7 @@ export default function ProfilePage() {
                   <p className="text-xs text-gray-500">Email cannot be changed</p>
                 </div>
 
-                {/* Phone */}
+               
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
                   <div className="relative">
@@ -300,7 +298,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Location */}
+               
                 <div className="space-y-2">
                   <Label htmlFor="location">Location</Label>
                   <div className="relative">
@@ -317,7 +315,7 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Bio */}
+              
               <div className="space-y-2">
                 <Label htmlFor="bio">About Me</Label>
                 <Textarea
@@ -332,7 +330,7 @@ export default function ProfilePage() {
 
               <Separator />
 
-              {/* Farm Details */}
+        
               <div>
                 <h3 className="font-medium text-gray-900 mb-4">Farm Details</h3>
                 <div className="grid gap-6 md:grid-cols-2">
@@ -388,7 +386,7 @@ export default function ProfilePage() {
           </Card>
         </TabsContent>
 
-        {/* Notifications Tab */}
+        
         <TabsContent value="notifications" className="mt-6">
           <Card>
             <CardHeader>
@@ -396,7 +394,7 @@ export default function ProfilePage() {
               <CardDescription>Choose how you want to receive notifications</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Notification Channels */}
+             
               <div>
                 <h3 className="font-medium text-gray-900 mb-4">Notification Channels</h3>
                 <div className="space-y-4">
@@ -446,7 +444,7 @@ export default function ProfilePage() {
 
               <Separator />
 
-              {/* Alert Types */}
+             
               <div>
                 <h3 className="font-medium text-gray-900 mb-4">Alert Types</h3>
                 <div className="space-y-4">
@@ -506,7 +504,7 @@ export default function ProfilePage() {
           </Card>
         </TabsContent>
 
-        {/* Language Tab */}
+      
         <TabsContent value="language" className="mt-6">
           <Card>
             <CardHeader>
@@ -558,9 +556,9 @@ export default function ProfilePage() {
           </Card>
         </TabsContent>
 
-        {/* Security Tab */}
+    
         <TabsContent value="security" className="mt-6 space-y-6">
-          {/* Two-Factor Authentication */}
+          
           <TwoFactorSettings />
           
           <Card>
@@ -569,7 +567,7 @@ export default function ProfilePage() {
               <CardDescription>Manage your account security and privacy</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Verification Status */}
+             
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-4">
                 <div className="bg-green-600 rounded-full p-3">
                   <Shield className="w-6 h-6 text-white" />
@@ -580,7 +578,7 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Connected Accounts */}
+             
               <div>
                 <h3 className="font-medium text-gray-900 mb-4">Connected Accounts</h3>
                 <div className="space-y-3">
@@ -606,7 +604,7 @@ export default function ProfilePage() {
 
               <Separator />
 
-              {/* Payment Methods */}
+              
               <div>
                 <h3 className="font-medium text-gray-900 mb-4">Payment Methods</h3>
                 <div className="p-4 border border-dashed rounded-lg text-center">
@@ -620,7 +618,7 @@ export default function ProfilePage() {
 
               <Separator />
 
-              {/* Danger Zone */}
+             
               <div>
                 <h3 className="font-medium text-red-600 mb-4">Danger Zone</h3>
                 <div className="space-y-3">

@@ -43,7 +43,7 @@ export default function MessagesPage() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [hoveredMessageId, setHoveredMessageId] = useState<string | null>(null);
 
-  // Get inbox - combines sent and received messages
+ 
   const { data: inbox, refetch: refetchInbox } = api.message.getInbox.useQuery(
     undefined,
     {
@@ -51,12 +51,11 @@ export default function MessagesPage() {
     }
   );
 
-  // Get unread count
   const { data: unreadCount } = api.message.getUnreadCount.useQuery(undefined, {
     refetchInterval: 10000,
   });
 
-  // Search users for new chat
+  
   const { data: searchResults } = api.message.searchUsers.useQuery(
     { query: userSearch },
     {
@@ -64,25 +63,25 @@ export default function MessagesPage() {
     }
   );
 
-  // Get recent contacts based on bid interactions
+  
   const { data: recentContacts } = api.message.getRecentContacts.useQuery();
 
-  // Get conversation with selected user
+  
   const { data: conversationData, refetch: refetchConversation } =
     api.message.getConversation.useQuery(
       { userId: selectedUser! },
       {
         enabled: !!selectedUser,
-        refetchInterval: 3000, // Poll every 3 seconds when in conversation
+        refetchInterval: 3000, 
       }
     );
 
-  // Get the selected user's info from inbox or recentContacts
+ 
   const inboxUser = inbox?.find((c) => c.user.id === selectedUser)?.user;
   const recentUser = recentContacts?.find((c) => c.id === selectedUser);
   const searchUser = searchResults?.find((u) => u.id === selectedUser);
   
-  // Helper to get user display info
+ 
   const getSelectedUserName = () => inboxUser?.name ?? recentUser?.name ?? searchUser?.name ?? "Unknown User";
   const getSelectedUserRole = () => inboxUser?.role ?? recentUser?.role ?? searchUser?.role ?? "USER";
   const getSelectedUserLocation = () => {
@@ -109,7 +108,7 @@ export default function MessagesPage() {
     },
   });
 
-  // Update selected user from URL
+  
   useEffect(() => {
     if (userIdFromUrl) {
       setSelectedUser(userIdFromUrl);
@@ -173,7 +172,7 @@ export default function MessagesPage() {
             </p>
           </div>
 
-          {/* New Chat Button */}
+          
           <button
             onClick={() => setNewChatOpen(true)}
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-md transition-all hover:shadow-lg hover:from-green-700 hover:to-emerald-700"
@@ -184,15 +183,15 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      {/* Main Chat Container */}
+  
       <div className="flex flex-1 gap-4 overflow-hidden px-4 pb-4">
-        {/* Inbox Sidebar */}
+      
         <div className="hidden w-80 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:flex">
-          {/* Sidebar Header */}
+        
           <div className="shrink-0 border-b border-gray-200 p-4 dark:border-gray-700">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white">Conversations</h2>
             
-            {/* Search */}
+            
             <div className="relative mt-4">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <input
@@ -205,7 +204,7 @@ export default function MessagesPage() {
             </div>
           </div>
 
-          {/* Inbox List */}
+         
           <div className="flex-1 overflow-y-auto">
             {!inbox || inbox.length === 0 ? (
               <div className="flex h-full flex-col items-center justify-center p-6 text-center">
@@ -282,11 +281,11 @@ export default function MessagesPage() {
           </div>
         </div>
 
-        {/* Chat Area */}
+      
         <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
           {hasSelectedUser ? (
             <>
-              {/* Chat Header */}
+             
               <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-gray-700">
                 <div className="flex items-center gap-4">
                   <button
@@ -296,7 +295,6 @@ export default function MessagesPage() {
                     <ArrowLeft className="h-5 w-5" />
                   </button>
 
-                  {/* User Info */}
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 font-bold text-white">
                       {getSelectedUserName()[0]?.toUpperCase() ?? "U"}
@@ -315,7 +313,7 @@ export default function MessagesPage() {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
+                
                 <div className="flex items-center gap-2">
                   <button className="rounded-full p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors">
                     <Phone className="h-5 w-5" />
@@ -335,9 +333,9 @@ export default function MessagesPage() {
                 </div>
               </div>
 
-              {/* Messages Area */}
+              
               <div className="flex-1 space-y-4 overflow-y-auto p-6">
-                {/* Error Display */}
+               
                 {sendMessage.isError && (
                   <div className="mx-auto max-w-md rounded-lg border border-red-300 bg-red-50 p-3 text-center dark:bg-red-900/20 dark:border-red-700">
                     <p className="text-sm text-red-700 dark:text-red-200">
@@ -346,7 +344,7 @@ export default function MessagesPage() {
                   </div>
                 )}
 
-                {/* Loading Indicator */}
+               
                 {!conversationData && (
                   <div className="flex h-full flex-col items-center justify-center">
                     <Loader2 className="h-8 w-8 animate-spin text-green-600 dark:text-green-400" />
@@ -420,7 +418,7 @@ export default function MessagesPage() {
                 )}
               </div>
 
-              {/* Message Input */}
+              
               <div className="border-t border-gray-200 p-4 dark:border-gray-700">
                 <div className="flex items-end gap-2">
                   <button 
@@ -499,7 +497,7 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      {/* New Chat Modal */}
+     
       {newChatOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="w-full max-w-md rounded-xl bg-white shadow-xl dark:bg-gray-800">
@@ -523,7 +521,7 @@ export default function MessagesPage() {
                 Search for a user or select from your recent contacts
               </p>
 
-              {/* Search Input */}
+              
               <div className="relative mb-4">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <input
@@ -535,7 +533,7 @@ export default function MessagesPage() {
                 />
               </div>
 
-              {/* Search Results */}
+            
               {userSearch.length >= 2 && searchResults && (
                 <div className="space-y-2">
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Search Results</p>
@@ -570,7 +568,7 @@ export default function MessagesPage() {
                 </div>
               )}
 
-              {/* Recent Contacts */}
+              
               {userSearch.length < 2 && recentContacts && recentContacts.length > 0 && (
                 <div className="space-y-2">
                   <p className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">

@@ -47,7 +47,7 @@ export async function generateWithGemini(prompt: string): Promise<string> {
   return data.candidates[0]?.content.parts[0]?.text ?? "";
 }
 
-// AI Price Prediction
+
 export async function predictCropPrice(params: {
   cropName: string;
   state: string;
@@ -91,7 +91,7 @@ Consider these factors:
 
   try {
     const response = await generateWithGemini(prompt);
-    // Clean the response - remove markdown code blocks if present
+   
     const cleanedResponse = response.replace(/```json\n?|\n?```/g, "").trim();
     const parsed = JSON.parse(cleanedResponse) as {
       predictedPrice: number;
@@ -114,7 +114,7 @@ Consider these factors:
   }
 }
 
-// AI Crop Recommendation
+
 export async function getAICropRecommendation(params: {
   state: string;
   district?: string;

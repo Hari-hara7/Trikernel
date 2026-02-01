@@ -68,13 +68,13 @@ export default function MyBidsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+    
       <div>
         <h1 className="text-2xl font-bold">My Bids</h1>
         <p className="text-muted-foreground">Track and manage your placed bids</p>
       </div>
 
-      {/* Stats */}
+     
       <div className="grid gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="pt-6">
@@ -119,7 +119,7 @@ export default function MyBidsPage() {
         </Card>
       </div>
 
-      {/* Bids Tabs */}
+      
       <Tabs defaultValue="pending">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="pending" className="gap-2">
@@ -195,7 +195,7 @@ export default function MyBidsPage() {
         </TabsContent>
       </Tabs>
 
-      {/* Cancel Dialog */}
+      
       <Dialog open={!!cancelDialogId} onOpenChange={() => setCancelDialogId(null)}>
         <DialogContent>
           <DialogHeader>

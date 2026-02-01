@@ -1,16 +1,12 @@
 import { generateSecret, generateURI, verifySync } from "otplib";
 import * as QRCode from "qrcode";
 
-/**
- * Generate a new TOTP secret for a user
- */
+
 export function generateTwoFactorSecret(): string {
   return generateSecret({ length: 20 });
 }
 
-/**
- * Generate an otpauth URI for use with authenticator apps
- */
+
 export function generateTwoFactorUri(
   email: string,
   secret: string,

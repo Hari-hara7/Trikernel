@@ -128,9 +128,8 @@ export const authRouter = createTRPCRouter({
       };
     }),
 
-  // ==================== TWO-FACTOR AUTHENTICATION ====================
 
-  // Get 2FA status
+
   getTwoFactorStatus: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.db.user.findUnique({
       where: { id: ctx.session.user.id },
@@ -142,7 +141,7 @@ export const authRouter = createTRPCRouter({
     };
   }),
 
-  // Generate 2FA setup (secret + QR code)
+ 
   setupTwoFactor: protectedProcedure.mutation(async ({ ctx }) => {
     const user = await ctx.db.user.findUnique({
       where: { id: ctx.session.user.id },
@@ -163,13 +162,13 @@ export const authRouter = createTRPCRouter({
       });
     }
 
-    // Generate new secret
+    
     const secret = generateTwoFactorSecret();
 
-    // Generate QR code
+   
     const qrCode = await generateTwoFactorQRCode(user.email, secret);
 
-    // Store the secret temporarily (not enabled yet)
+   
     await ctx.db.user.update({
       where: { id: ctx.session.user.id },
       data: { twoFactorSecret: secret },
@@ -181,7 +180,7 @@ export const authRouter = createTRPCRouter({
     };
   }),
 
-  // Verify and enable 2FA
+ 
   enableTwoFactor: protectedProcedure
     .input(
       z.object({
@@ -215,7 +214,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      // Verify the token
+    
       const isValid = verifyTwoFactorToken(input.token, user.twoFactorSecret);
 
       if (!isValid) {
@@ -229,7 +228,7 @@ export const authRouter = createTRPCRouter({
       const backupCodes = generateBackupCodes(10);
       const hashedBackupCodes = await hashBackupCodes(backupCodes);
 
-      // Enable 2FA
+
       await ctx.db.user.update({
         where: { id: ctx.session.user.id },
         data: {
@@ -237,7 +236,7 @@ export const authRouter = createTRPCRouter({
         },
       });
 
-      // Log the action
+     
       await ctx.db.auditLog.create({
         data: {
           userId: ctx.session.user.id,
@@ -252,7 +251,6 @@ export const authRouter = createTRPCRouter({
       };
     }),
 
-  // Disable 2FA
   disableTwoFactor: protectedProcedure
     .input(
       z.object({
@@ -300,7 +298,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      // Verify the token
+   
       if (!user.twoFactorSecret) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -316,7 +314,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      // Disable 2FA
+      
       await ctx.db.user.update({
         where: { id: ctx.session.user.id },
         data: {
@@ -325,7 +323,7 @@ export const authRouter = createTRPCRouter({
         },
       });
 
-      // Log the action
+      
       await ctx.db.auditLog.create({
         data: {
           userId: ctx.session.user.id,
@@ -337,7 +335,7 @@ export const authRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  // Verify 2FA token during login (called from login page)
+  
   verifyTwoFactorLogin: publicProcedure
     .input(
       z.object({
@@ -365,7 +363,7 @@ export const authRouter = createTRPCRouter({
       const isValid = verifyTwoFactorToken(input.token, user.twoFactorSecret);
 
       if (!isValid) {
-        // Log failed 2FA attempt
+        
         await ctx.db.auditLog.create({
           data: {
             userId: user.id,
@@ -380,7 +378,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      // Log successful 2FA verification
+    
       await ctx.db.auditLog.create({
         data: {
           userId: user.id,
@@ -392,7 +390,7 @@ export const authRouter = createTRPCRouter({
       return { success: true, userId: user.id };
     }),
 
-  // Check if user has 2FA enabled (for login flow)
+  
   checkTwoFactorRequired: publicProcedure
     .input(
       z.object({

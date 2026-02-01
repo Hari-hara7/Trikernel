@@ -60,13 +60,12 @@ export default function BrowseCropsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+     
       <div>
         <h1 className="text-2xl font-bold">Browse Crops</h1>
         <p className="text-muted-foreground">Find fresh crops from verified farmers</p>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -107,7 +106,7 @@ export default function BrowseCropsPage() {
         </Select>
       </div>
 
-      {/* Results */}
+      
       {isLoading ? (
         <div className="flex items-center justify-center py-12">
           <Spinner size="lg" />
@@ -133,7 +132,7 @@ export default function BrowseCropsPage() {
               >
                 <Card className="h-full hover:border-primary hover:shadow-md transition-all">
                   <CardContent className="pt-6 space-y-4">
-                    {/* Crop Info */}
+                    
                     <div className="flex items-start justify-between">
                       <div>
                         <h3 className="font-semibold text-lg">{listing.cropName}</h3>
@@ -151,7 +150,7 @@ export default function BrowseCropsPage() {
                       </div>
                     </div>
 
-                    {/* Quantity */}
+                    
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">Available</span>
                       <span className="font-medium">
@@ -159,7 +158,7 @@ export default function BrowseCropsPage() {
                       </span>
                     </div>
 
-                    {/* Farmer Info */}
+                    
                     <div className="flex items-center gap-3 pt-3 border-t">
                       <Avatar className="h-10 w-10">
                         <AvatarImage src={listing.farmer.image ?? undefined} />
@@ -186,7 +185,7 @@ export default function BrowseCropsPage() {
                       )}
                     </div>
 
-                    {/* Bids Count */}
+                  
                     <div className="text-xs text-muted-foreground">
                       {listing._count.bids} bid{listing._count.bids !== 1 ? "s" : ""} placed
                     </div>
@@ -196,7 +195,7 @@ export default function BrowseCropsPage() {
             ))}
           </div>
 
-          {/* Load More */}
+         
           {hasNextPage && (
             <div className="flex justify-center pt-4">
               <Button

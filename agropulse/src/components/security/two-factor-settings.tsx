@@ -36,10 +36,10 @@ export function TwoFactorSettings() {
   const [showBackupCodes, setShowBackupCodes] = useState(false);
   const [copiedSecret, setCopiedSecret] = useState(false);
 
-  // Get 2FA status
+  
   const { data: status, refetch: refetchStatus } = api.auth.getTwoFactorStatus.useQuery();
 
-  // Setup 2FA mutation
+
   const setupMutation = api.auth.setupTwoFactor.useMutation({
     onError: (error) => {
       toast({
@@ -50,7 +50,7 @@ export function TwoFactorSettings() {
     },
   });
 
-  // Enable 2FA mutation
+  
   const enableMutation = api.auth.enableTwoFactor.useMutation({
     onSuccess: (data) => {
       setBackupCodes(data.backupCodes);
@@ -73,7 +73,7 @@ export function TwoFactorSettings() {
     },
   });
 
-  // Disable 2FA mutation
+  
   const disableMutation = api.auth.disableTwoFactor.useMutation({
     onSuccess: () => {
       setIsDisableOpen(false);
@@ -192,7 +192,7 @@ export function TwoFactorSettings() {
         </CardFooter>
       </Card>
 
-      {/* Setup Dialog */}
+    
       <Dialog open={isSetupOpen} onOpenChange={setIsSetupOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -259,7 +259,7 @@ export function TwoFactorSettings() {
         </DialogContent>
       </Dialog>
 
-      {/* Disable Dialog */}
+      
       <Dialog open={isDisableOpen} onOpenChange={setIsDisableOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -313,7 +313,7 @@ export function TwoFactorSettings() {
         </DialogContent>
       </Dialog>
 
-      {/* Backup Codes Dialog */}
+      
       <Dialog open={showBackupCodes} onOpenChange={setShowBackupCodes}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>

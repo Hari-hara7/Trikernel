@@ -67,7 +67,7 @@ export default function ListingsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+     
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">My Listings</h1>
@@ -81,7 +81,7 @@ export default function ListingsPage() {
         </Button>
       </div>
 
-      {/* Tabs */}
+      
       <Tabs defaultValue="active" className="space-y-4">
         <TabsList>
           <TabsTrigger value="active" className="gap-2">

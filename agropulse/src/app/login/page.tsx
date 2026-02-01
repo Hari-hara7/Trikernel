@@ -41,7 +41,7 @@ export default function LoginPage() {
       console.log("SignIn result:", result);
 
       if (result?.error) {
-        // Check if 2FA is required - error message may be wrapped
+        
         if (result.error.includes("2FA_REQUIRED")) {
           setRequires2FA(true);
           toast({
@@ -89,7 +89,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 px-4 py-12">
-      {/* Language Switcher - Top Right */}
+      
       <div className="absolute top-4 right-4">
         <LanguageSwitcher showLabel />
       </div>
@@ -215,8 +215,7 @@ export default function LoginPage() {
           </form>
         </Card>
 
-        {/* Demo accounts info */}
-        <div className="mt-6 p-4 bg-white/50 rounded-lg border">
+               <div className="mt-6 p-4 bg-white/50 rounded-lg border">
           <p className="text-sm text-center text-muted-foreground mb-2">
             <strong>{t("auth.demoAccounts")}:</strong>
           </p>

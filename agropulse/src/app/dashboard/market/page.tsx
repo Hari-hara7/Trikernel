@@ -78,7 +78,7 @@ export default function MarketPage() {
     },
   });
 
-  // Live prices from govt API
+
   const { data: liveData, isLoading: loadingLive, refetch: refetchLive, isSuccess: liveSuccess } =
     api.market.fetchFreshPrices.useQuery(
       { state: selectedState, limit: 50 },
@@ -91,7 +91,7 @@ export default function MarketPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+    
       <div className="flex flex-col gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Market Intelligence</h1>
@@ -100,7 +100,7 @@ export default function MarketPage() {
           </p>
         </div>
 
-        {/* Action Buttons */}
+        
         <div className="flex flex-wrap items-center gap-3">
           <Button
             variant="default"
@@ -130,7 +130,7 @@ export default function MarketPage() {
             <RefreshCw className="h-4 w-4" />
             Refresh
           </Button>
-          {/* Seed button for demo */}
+          
           <Button
             variant="secondary"
             size="sm"
@@ -142,7 +142,7 @@ export default function MarketPage() {
         </div>
       </div>
 
-      {/* Live Price Status Banner */}
+     
       {liveSuccess && liveData && (
         <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
           <div className="mt-0.5">
@@ -159,7 +159,7 @@ export default function MarketPage() {
         </div>
       )}
 
-      {/* Tabs */}
+  
       <Tabs defaultValue="prices">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="prices" className="gap-2">
@@ -180,9 +180,8 @@ export default function MarketPage() {
           </TabsTrigger>
         </TabsList>
 
-        {/* Mandi Prices Tab */}
+        
         <TabsContent value="prices" className="mt-6 space-y-6">
-          {/* Quick Stats */}
           {mandiPrices && mandiPrices.length > 0 && (
             <div className="grid gap-4 md:grid-cols-4">
               <Card>
@@ -233,7 +232,7 @@ export default function MarketPage() {
             </div>
           )}
 
-          {/* Filter */}
+     
           <div className="flex gap-4">
             <Select value={selectedState} onValueChange={setSelectedState}>
               <SelectTrigger className="w-[200px]">
@@ -257,7 +256,7 @@ export default function MarketPage() {
           ) : mandiPrices && mandiPrices.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {mandiPrices.map((price) => {
-                // Calculate estimated change from min/max range
+               
                 const midPoint = (price.maxPrice + price.minPrice) / 2;
                 const deviation = ((price.modalPrice - midPoint) / midPoint) * 100;
                 const isUp = deviation >= 0;
@@ -324,9 +323,9 @@ export default function MarketPage() {
           )}
         </TabsContent>
 
-        {/* Live API Tab */}
+        
         <TabsContent value="live" className="mt-6 space-y-6">
-          {/* API Status Card */}
+        
           <Card className="border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -383,7 +382,7 @@ export default function MarketPage() {
                 </Button>
               </div>
 
-              {/* API Info Grid */}
+              
               <div className="grid gap-3 md:grid-cols-3">
                 <div className="p-4 bg-white rounded-lg border border-green-200 hover:shadow-sm transition-shadow">
                   <h4 className="font-medium text-sm text-gray-600 uppercase tracking-wide">Data Source</h4>
@@ -402,7 +401,7 @@ export default function MarketPage() {
                 </div>
               </div>
 
-              {/* Data Sync Status */}
+             
               {liveSuccess && liveData && (
                 <div className="mt-4 p-4 bg-green-100 border border-green-300 rounded-lg">
                   <div className="flex items-start gap-3">
@@ -453,7 +452,7 @@ export default function MarketPage() {
           </Card>
         </TabsContent>
 
-        {/* Price Comparison Tab */}
+        
         <TabsContent value="comparison" className="mt-6 space-y-6">
           {/* Crop Selector */}
           <div className="flex gap-4">
@@ -554,7 +553,7 @@ export default function MarketPage() {
           )}
         </TabsContent>
 
-        {/* Trends Tab */}
+        
         <TabsContent value="trends" className="mt-6 space-y-6">
           {loadingTrending ? (
             <div className="flex items-center justify-center py-12">
@@ -607,7 +606,7 @@ export default function MarketPage() {
                 </CardContent>
               </Card>
 
-              {/* Categories */}
+             
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-secondary">
@@ -664,7 +663,7 @@ export default function MarketPage() {
             </Card>
           )}
 
-          {/* AI Insights */}
+          
           <Card className="border-secondary/50 bg-secondary/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

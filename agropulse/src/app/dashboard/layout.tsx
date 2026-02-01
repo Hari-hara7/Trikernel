@@ -25,7 +25,7 @@ export default async function DashboardLayout({
         <div className="min-h-screen bg-gray-50">
           <DashboardNav />
           
-          {/* Main content area */}
+         
           <main className="lg:ml-64 pt-14 lg:pt-16 min-h-screen">
             <div className="p-4 lg:p-6">
               {children}

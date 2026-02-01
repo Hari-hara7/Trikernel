@@ -11,7 +11,7 @@ import {
 } from "~/server/services/mandi-prices";
 
 export const marketRouter = createTRPCRouter({
-  // Get mandi prices
+  
   getMandiPrices: publicProcedure
     .input(
       z.object({
@@ -37,7 +37,7 @@ export const marketRouter = createTRPCRouter({
       return prices;
     }),
 
-  // Get AI predictions
+  
   getAIPredictions: publicProcedure
     .input(
       z.object({
@@ -47,7 +47,7 @@ export const marketRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      // First check cache
+     
       const cached = await ctx.db.aIPrediction.findFirst({
         where: {
           cropName: { equals: input.cropName, mode: "insensitive" as const },
@@ -61,11 +61,11 @@ export const marketRouter = createTRPCRouter({
         return cached;
       }
 
-      // Return null if no cached prediction - AI service will be called separately
+      
       return null;
     }),
 
-  // Store AI prediction (internal use)
+  
   storeAIPrediction: protectedProcedure
     .input(
       z.object({
@@ -87,7 +87,7 @@ export const marketRouter = createTRPCRouter({
       return prediction;
     }),
 
-  // Get price comparison for a crop
+  
   getPriceComparison: publicProcedure
     .input(
       z.object({
@@ -96,7 +96,7 @@ export const marketRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      // Get average prices by state
+  
       const pricesByState = await ctx.db.mandiPrice.groupBy({
         by: ["state"],
         where: {
@@ -111,7 +111,7 @@ export const marketRouter = createTRPCRouter({
         _count: true,
       });
 
-      // Get current listings average price
+      
       const listingAvg = await ctx.db.cropListing.aggregate({
         where: {
           cropName: { equals: input.cropName, mode: "insensitive" as const },
@@ -129,7 +129,7 @@ export const marketRouter = createTRPCRouter({
       };
     }),
 
-  // Get trending crops
+  
   getTrendingCrops: publicProcedure.query(async ({ ctx }) => {
     const trending = await ctx.db.cropListing.groupBy({
       by: ["cropName", "category"],
@@ -152,7 +152,7 @@ export const marketRouter = createTRPCRouter({
     return trending;
   }),
 
-  // Get states with active listings
+ 
   getActiveStates: publicProcedure.query(async ({ ctx }) => {
     const states = await ctx.db.user.groupBy({
       by: ["state"],
@@ -169,7 +169,7 @@ export const marketRouter = createTRPCRouter({
     return states.filter((s) => s.state);
   }),
 
-  // Seed mandi prices (for demo)
+ 
   seedMandiPrices: protectedProcedure.mutation(async ({ ctx }) => {
     const crops = [
       { name: "Wheat", category: "GRAINS" },
@@ -216,9 +216,7 @@ export const marketRouter = createTRPCRouter({
     return { success: true, count: prices.length };
   }),
 
-  // ==================== LIVE MANDI PRICES ====================
-
-  // Get live mandi prices with fallback to cached
+  
   getLiveMandiPrices: publicProcedure
     .input(
       z.object({
@@ -238,7 +236,7 @@ export const marketRouter = createTRPCRouter({
       return result;
     }),
 
-  // Sync prices from government API
+  
   syncLivePrices: protectedProcedure
     .input(
       z.object({
@@ -254,7 +252,7 @@ export const marketRouter = createTRPCRouter({
       return result;
     }),
 
-  // Get available states for filtering
+  
   getAvailableStates: publicProcedure.query(async () => {
     return await getAvailableStates();
   }),

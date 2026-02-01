@@ -49,7 +49,7 @@ export default function CropDetailPage({ params }: { params: Promise<{ id: strin
   const { data: listing, isLoading } = api.crop.getById.useQuery({ id });
   const { data: bids, refetch: refetchBids } = api.bid.getForListing.useQuery(
     { listingId: id },
-    { refetchInterval: 5000 } // Real-time polling every 5 seconds
+    { refetchInterval: 5000 } 
   );
 
   const placeBidMutation = api.bid.create.useMutation({
@@ -135,9 +135,9 @@ export default function CropDetailPage({ params }: { params: Promise<{ id: strin
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        {/* Main Content */}
+       
         <div className="lg:col-span-2 space-y-6">
-          {/* Crop Details */}
+          
           <Card>
             <CardHeader>
               <CardTitle>Crop Details</CardTitle>
@@ -179,7 +179,7 @@ export default function CropDetailPage({ params }: { params: Promise<{ id: strin
             </CardContent>
           </Card>
 
-          {/* Live Bids */}
+         
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
@@ -255,9 +255,9 @@ export default function CropDetailPage({ params }: { params: Promise<{ id: strin
           </Card>
         </div>
 
-        {/* Sidebar */}
+        
         <div className="space-y-6">
-          {/* Farmer Info */}
+         
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -315,7 +315,7 @@ export default function CropDetailPage({ params }: { params: Promise<{ id: strin
             </CardContent>
           </Card>
 
-          {/* Place Bid */}
+        
           <Card className="border-primary/50 bg-primary/5">
             <CardHeader>
               <CardTitle>Place Your Bid</CardTitle>

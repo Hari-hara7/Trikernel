@@ -27,7 +27,7 @@ export function FarmerDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome Section */}
+      
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{t("dashboard.welcomeBack")} 👋</h1>
@@ -41,7 +41,7 @@ export function FarmerDashboard() {
         </Button>
       </div>
 
-      {/* Stats Grid */}
+      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -96,7 +96,7 @@ export function FarmerDashboard() {
         </Card>
       </div>
 
-      {/* AI Quick Actions */}
+      
       <Card className="border-secondary/30 bg-gradient-to-r from-secondary/5 to-primary/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -149,7 +149,7 @@ export function FarmerDashboard() {
         </CardContent>
       </Card>
 
-      {/* Recent Bids */}
+    
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
@@ -203,7 +203,7 @@ export function FarmerDashboard() {
         </CardContent>
       </Card>
 
-      {/* My Listings */}
+      
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div>

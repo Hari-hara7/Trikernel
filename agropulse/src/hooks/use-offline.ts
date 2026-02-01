@@ -1,4 +1,4 @@
-// Hook for detecting offline/online status and syncing data
+
 
 'use client';
 
@@ -16,7 +16,7 @@ export function useOfflineSupport() {
   const [pendingListings, setPendingListings] = useState(0);
   const [isSyncing, setIsSyncing] = useState(false);
 
-  // Listen for online/offline events
+  
   useEffect(() => {
     setIsOnline(navigator.onLine);
 
@@ -38,7 +38,7 @@ export function useOfflineSupport() {
     };
   }, []);
 
-  // Load pending data counts
+ 
   const loadPendingCounts = useCallback(async () => {
     try {
       const messages = await getPendingMessages();
@@ -50,7 +50,7 @@ export function useOfflineSupport() {
     }
   }, []);
 
-  // Sync pending data
+  
   const syncPendingData = useCallback(async () => {
     if (!isOnline || isSyncing) return;
 

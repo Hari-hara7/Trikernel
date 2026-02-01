@@ -23,7 +23,7 @@ export default function MatchmakingPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+    
       <div>
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <Sparkles className="h-6 w-6 text-accent" />
@@ -34,7 +34,7 @@ export default function MatchmakingPage() {
         </p>
       </div>
 
-      {/* Recommendations */}
+      
       {isLoading ? (
         <div className="flex items-center justify-center py-12">
           <Spinner size="lg" />
@@ -79,7 +79,7 @@ export default function MatchmakingPage() {
                     </div>
                   </div>
 
-                  {/* Price & Quantity */}
+            
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-muted-foreground">Price</p>
@@ -96,7 +96,7 @@ export default function MatchmakingPage() {
                     </div>
                   </div>
 
-                  {/* Farmer */}
+                 
                   <div className="flex items-center gap-3 pt-3 border-t">
                     <Avatar className="h-10 w-10">
                       <AvatarImage src={rec.farmer.image ?? undefined} />
@@ -121,7 +121,7 @@ export default function MatchmakingPage() {
                     )}
                   </div>
 
-                  {/* CTA */}
+                
                   <Button asChild className="w-full">
                     <Link href={`/dashboard/browse/${rec.id}`}>
                       View & Place Bid
@@ -150,7 +150,7 @@ export default function MatchmakingPage() {
         </Card>
       )}
 
-      {/* Trust Score Info */}
+    
       <Card className="bg-secondary/5 border-secondary/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

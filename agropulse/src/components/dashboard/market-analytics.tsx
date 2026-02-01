@@ -17,14 +17,13 @@ export function MarketAnalytics({ cropName, location }: MarketAnalyticsProps) {
   const [analyticsData, setAnalyticsData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Get market analytics data
+  
   const { data: marketData, isLoading: marketLoading } = api.market.getMandiPrices.useQuery({
     cropName,
     state: location,
     limit: 10,
   });
 
-  // Get AI predictions
   const { data: predictions, isLoading: predictionLoading } = api.market.getAIPredictions.useQuery({
     cropName: cropName || "",
     state: location || "",
@@ -50,7 +49,6 @@ export function MarketAnalytics({ cropName, location }: MarketAnalyticsProps) {
 
   return (
     <div className="space-y-6">
-      {/* Market Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -123,7 +121,6 @@ export function MarketAnalytics({ cropName, location }: MarketAnalyticsProps) {
         </Card>
       </div>
 
-      {/* AI Price Prediction */}
       {analyticsData?.predictions && (
         <Card>
           <CardHeader>
@@ -175,7 +172,6 @@ export function MarketAnalytics({ cropName, location }: MarketAnalyticsProps) {
         </Card>
       )}
 
-      {/* Market Insights */}
       <Card>
         <CardHeader>
           <CardTitle>Market Insights</CardTitle>

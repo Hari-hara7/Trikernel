@@ -19,7 +19,7 @@ export function LandingPageClient() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navbar */}
+     
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -49,7 +49,7 @@ export function LandingPageClient() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+     
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -86,7 +86,7 @@ export function LandingPageClient() {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -99,7 +99,7 @@ export function LandingPageClient() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1 */}
+            
             <div className="p-6 rounded-xl border bg-card hover:shadow-lg transition-shadow">
               <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Gavel className="h-6 w-6 text-primary" />
@@ -108,7 +108,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.feature1Desc")}</p>
             </div>
 
-            {/* Feature 2 */}
+            
             <div className="p-6 rounded-xl border bg-card hover:shadow-lg transition-shadow">
               <div className="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
                 <Brain className="h-6 w-6 text-secondary" />
@@ -117,7 +117,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.feature2Desc")}</p>
             </div>
 
-            {/* Feature 3 */}
+            
             <div className="p-6 rounded-xl border bg-card hover:shadow-lg transition-shadow">
               <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                 <BarChart3 className="h-6 w-6 text-accent" />
@@ -126,7 +126,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.feature3Desc")}</p>
             </div>
 
-            {/* Feature 4 */}
+          
             <div className="p-6 rounded-xl border bg-card hover:shadow-lg transition-shadow">
               <div className="h-12 w-12 rounded-lg bg-green-100 flex items-center justify-center mb-4">
                 <Users className="h-6 w-6 text-green-600" />
@@ -135,7 +135,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.feature4Desc")}</p>
             </div>
 
-            {/* Feature 5 */}
+            
             <div className="p-6 rounded-xl border bg-card hover:shadow-lg transition-shadow">
               <div className="h-12 w-12 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
                 <ShieldCheck className="h-6 w-6 text-purple-600" />
@@ -144,7 +144,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.feature5Desc")}</p>
             </div>
 
-            {/* Feature 6 */}
+            
             <div className="p-6 rounded-xl border bg-card hover:shadow-lg transition-shadow">
               <div className="h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
                 <CheckCircle className="h-6 w-6 text-blue-600" />
@@ -156,7 +156,7 @@ export function LandingPageClient() {
         </div>
       </section>
 
-      {/* How It Works */}
+      
       <section className="py-20 bg-gradient-to-b from-background to-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -165,7 +165,7 @@ export function LandingPageClient() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Step 1 */}
+            
             <div className="text-center">
               <div className="h-16 w-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6">
                 1
@@ -174,7 +174,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.step1Desc")}</p>
             </div>
 
-            {/* Step 2 */}
+            
             <div className="text-center">
               <div className="h-16 w-16 rounded-full bg-secondary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6">
                 2
@@ -183,7 +183,7 @@ export function LandingPageClient() {
               <p className="text-gray-600">{t("landing.step2Desc")}</p>
             </div>
 
-            {/* Step 3 */}
+            
             <div className="text-center">
               <div className="h-16 w-16 rounded-full bg-accent text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6">
                 3
@@ -195,7 +195,7 @@ export function LandingPageClient() {
         </div>
       </section>
 
-      {/* CTA Section */}
+     
       <section className="py-20 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">{t("landing.ctaTitle")}</h2>
@@ -212,7 +212,7 @@ export function LandingPageClient() {
         </div>
       </section>
 
-      {/* Footer */}
+     
       <footer className="py-12 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">

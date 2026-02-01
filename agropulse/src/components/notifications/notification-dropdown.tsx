@@ -130,7 +130,7 @@ export function NotificationDropdown() {
           </div>
         </div>
 
-        {/* Notifications List */}
+       
         <ScrollArea className="max-h-[400px]">
           {isLoading ? (
             <div className="p-4 text-center text-gray-500">
@@ -196,7 +196,7 @@ export function NotificationDropdown() {
           )}
         </ScrollArea>
 
-        {/* Footer */}
+       
         <div className="p-3 border-t">
           <div className="flex gap-2">
             {notifications.length > 0 ? (

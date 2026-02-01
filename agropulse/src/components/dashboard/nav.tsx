@@ -63,7 +63,6 @@ export function DashboardNav() {
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-white border-r">
         {/* Logo */}
         <div className="flex items-center gap-2 px-6 py-4 border-b">
@@ -78,7 +77,6 @@ export function DashboardNav() {
           </div>
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
@@ -100,7 +98,6 @@ export function DashboardNav() {
           })}
         </nav>
 
-        {/* User section */}
         <div className="p-4 border-t">
           <div className="flex items-center gap-3">
             <Avatar>
@@ -119,7 +116,6 @@ export function DashboardNav() {
         </div>
       </aside>
 
-      {/* Mobile Header */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
@@ -145,7 +141,7 @@ export function DashboardNav() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        
         {mobileMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-white border-b shadow-lg">
             <nav className="px-4 py-4 space-y-1">

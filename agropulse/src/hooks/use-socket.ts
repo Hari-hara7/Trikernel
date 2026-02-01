@@ -7,12 +7,12 @@ export function useSocket() {
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    // Initialize socket connection
+    
     socketRef.current = io({
       path: "/api/socket",
     });
 
-    // Cleanup on unmount
+    
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();

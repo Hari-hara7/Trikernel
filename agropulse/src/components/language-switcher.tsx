@@ -24,7 +24,7 @@ export function LanguageSwitcher({
 }: LanguageSwitcherProps) {
   const translation = useTranslation();
   
-  // Handle case where component is rendered outside of LanguageProvider
+  
   if (!translation) {
     return (
       <Button variant={variant} size="sm" className={`gap-2 ${className}`} disabled>
@@ -36,7 +36,7 @@ export function LanguageSwitcher({
 
   const { locale, setLocale, locales, localeNames } = translation;
 
-  // Get display name safely
+ 
   const getDisplayName = (loc: Locale) => {
     const localeData = localeNames?.[loc];
     if (typeof localeData === 'string') return localeData;

@@ -16,7 +16,7 @@ import {
 } from "~/server/services/gemini";
 
 export const aiRouter = createTRPCRouter({
-  // Get AI price prediction for a crop (query version)
+  
   getPricePrediction: protectedProcedure
     .input(
       z.object({
@@ -28,7 +28,7 @@ export const aiRouter = createTRPCRouter({
       })
     )
     .query(async ({ input }) => {
-      // Simple prediction logic (can be enhanced with ML models)
+     
       const basePrice = 100; // Base price per unit
       const quantityMultiplier = input.quantity ? Math.max(0.8, Math.min(1.2, input.quantity / 1000)) : 1;
       const qualityMultiplier = input.quality === "premium" ? 1.3 : input.quality === "standard" ? 1.0 : 0.8;
@@ -48,7 +48,7 @@ export const aiRouter = createTRPCRouter({
       };
     }),
 
-  // Get AI price prediction for a crop
+ 
   predictPrice: protectedProcedure
     .input(
       z.object({
@@ -63,7 +63,7 @@ export const aiRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const prediction = await predictCropPrice(input);
 
-      // Store the prediction in the database
+      
       await ctx.db.aIPrediction.create({
         data: {
           cropName: input.cropName,
@@ -96,7 +96,7 @@ export const aiRouter = createTRPCRouter({
       return await getAICropRecommendation(input);
     }),
 
-  // Chat with AI assistant
+ 
   chat: protectedProcedure
     .input(
       z.object({
@@ -114,7 +114,7 @@ export const aiRouter = createTRPCRouter({
         },
       });
 
-      // Get user's crop listings if farmer
+    
       let crops: string[] = [];
       if (user?.role === "FARMER") {
         const listings = await ctx.db.cropListing.findMany({
@@ -136,7 +136,7 @@ export const aiRouter = createTRPCRouter({
       return { response };
     }),
 
-  // Analyze market trends
+  
   analyzeMarket: protectedProcedure
     .input(
       z.object({
@@ -145,7 +145,7 @@ export const aiRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      // Get historical prices from mandi data
+    
       const mandiPrices = await ctx.db.mandiPrice.findMany({
         where: {
           cropName: { contains: input.cropName, mode: "insensitive" },
@@ -404,7 +404,7 @@ export const aiRouter = createTRPCRouter({
       return await getWeatherBasedRecommendations(input);
     }),
 
-  // Market Price Comparison
+ 
   comparePrices: protectedProcedure
     .input(
       z.object({
@@ -424,7 +424,7 @@ export const aiRouter = createTRPCRouter({
       return await compareMarketPrices(input);
     }),
 
-  // Soil Health Analysis
+ 
   analyzeSoil: protectedProcedure
     .input(
       z.object({

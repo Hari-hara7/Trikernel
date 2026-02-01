@@ -1,4 +1,4 @@
-// IndexedDB utilities for offline storage
+
 
 export interface PendingMessage {
   id: string;

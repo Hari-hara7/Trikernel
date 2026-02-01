@@ -125,13 +125,13 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 px-4 py-12">
-      {/* Language Switcher - Top Right */}
+      
       <div className="absolute top-4 right-4">
         <LanguageSwitcher showLabel />
       </div>
 
       <div className="w-full max-w-md">
-        {/* Logo */}
+       
         <div className="flex flex-col items-center mb-8">
           <Link href="/" className="flex items-center gap-2 mb-2">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
@@ -148,7 +148,7 @@ export default function RegisterPage() {
             <CardDescription className="text-center">
               {step === 1 ? t("auth.enterCredentials") : t("profile.personalInfo")}
             </CardDescription>
-            {/* Progress bar */}
+            
             <div className="flex gap-2 pt-2">
               <div className={`h-1 flex-1 rounded-full ${step >= 1 ? "bg-primary" : "bg-muted"}`} />
               <div className={`h-1 flex-1 rounded-full ${step >= 2 ? "bg-primary" : "bg-muted"}`} />

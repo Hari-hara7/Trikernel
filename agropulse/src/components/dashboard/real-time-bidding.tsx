@@ -24,13 +24,13 @@ export function RealTimeBidding({ listingId }: RealTimeBiddingProps) {
 
   const { socket, joinListingRoom, placeBid, onNewBid } = useSocket();
 
-  // Get listing details
+  
   const { data: listing, isLoading: listingLoading } = api.crop.getById.useQuery({ id: listingId });
 
-  // Get existing bids
+ 
   const { data: existingBids, refetch: refetchBids } = api.bid.getForListing.useQuery({ listingId });
 
-  // Place bid mutation
+
   const placeBidMutation = api.bid.create.useMutation({
     onSuccess: () => {
       setBidAmount("");
@@ -76,7 +76,7 @@ export function RealTimeBidding({ listingId }: RealTimeBiddingProps) {
         bidAmount: amount,
       });
 
-      // Emit real-time bid update
+      
       placeBid({
         listingId,
         bidAmount: amount,
@@ -98,7 +98,7 @@ export function RealTimeBidding({ listingId }: RealTimeBiddingProps) {
 
   return (
     <div className="space-y-6">
-      {/* Listing Summary */}
+      
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -134,7 +134,7 @@ export function RealTimeBidding({ listingId }: RealTimeBiddingProps) {
         </CardContent>
       </Card>
 
-      {/* Place Bid */}
+
       {session?.user?.role === "BUYER" && (
         <Card>
           <CardHeader>
@@ -164,7 +164,7 @@ export function RealTimeBidding({ listingId }: RealTimeBiddingProps) {
         </Card>
       )}
 
-      {/* Live Bid Feed */}
+      
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -190,7 +190,7 @@ export function RealTimeBidding({ listingId }: RealTimeBiddingProps) {
               </div>
             ))}
 
-            {/* Existing bids */}
+            
             {existingBids?.map((bid) => (
               <div key={bid.id} className="flex items-center gap-3 p-3 border rounded-lg">
                 <Avatar className="h-8 w-8">

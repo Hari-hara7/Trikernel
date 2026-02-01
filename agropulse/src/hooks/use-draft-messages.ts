@@ -1,4 +1,4 @@
-// Draft message management
+
 
 'use client';
 
@@ -11,7 +11,7 @@ export function useDraftMessages() {
   const [drafts, setDrafts] = useState<PendingMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Load drafts from IndexedDB
+  
   const loadDrafts = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -24,7 +24,7 @@ export function useDraftMessages() {
     }
   }, []);
 
-  // Save a draft message
+  
   const saveDraft = useCallback(
     async (
       conversationId: string,
@@ -52,7 +52,7 @@ export function useDraftMessages() {
     []
   );
 
-  // Delete a draft
+  
   const deleteDraft = useCallback(async (draftId: string) => {
     try {
       await deletePendingMessage(draftId);
@@ -63,7 +63,7 @@ export function useDraftMessages() {
     }
   }, []);
 
-  // Get draft for a conversation
+ 
   const getDraftForConversation = useCallback(
     (conversationId: string) => {
       return drafts.find((d) => d.conversationId === conversationId);

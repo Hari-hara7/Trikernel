@@ -5,7 +5,7 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/
 import { CropCategory, CropStatus } from "../../../../generated/prisma";
 
 export const cropRouter = createTRPCRouter({
-  // Create a new crop listing (Farmer only)
+ 
   create: protectedProcedure
     .input(
       z.object({
@@ -54,7 +54,7 @@ export const cropRouter = createTRPCRouter({
       return listing;
     }),
 
-  // Get all active listings (public, for browsing)
+  
   getAll: publicProcedure
     .input(
       z.object({
@@ -126,7 +126,7 @@ export const cropRouter = createTRPCRouter({
       };
     }),
 
-  // Get a single listing by ID
+ 
   getById: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -175,7 +175,6 @@ export const cropRouter = createTRPCRouter({
       return listing;
     }),
 
-  // Get farmer's own listings
   getMyListings: protectedProcedure
     .input(
       z.object({
@@ -221,7 +220,7 @@ export const cropRouter = createTRPCRouter({
       return listings;
     }),
 
-  // Update listing status
+  
   updateStatus: protectedProcedure
     .input(
       z.object({
@@ -256,7 +255,7 @@ export const cropRouter = createTRPCRouter({
       return updated;
     }),
 
-  // Update listing
+ 
   update: protectedProcedure
     .input(
       z.object({
@@ -296,7 +295,7 @@ export const cropRouter = createTRPCRouter({
       return updated;
     }),
 
-  // Delete listing
+
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -325,7 +324,7 @@ export const cropRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  // Get listing statistics for farmer dashboard
+  
   getStats: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.session.user.role !== "FARMER") {
       throw new TRPCError({

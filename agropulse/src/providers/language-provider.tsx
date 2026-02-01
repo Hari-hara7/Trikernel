@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 import { type Locale, locales, defaultLocale, localeNames } from "~/i18n";
 
-// Import translation messages
+
 import enMessages from "~/messages/en.json";
 import hiMessages from "~/messages/hi.json";
 import mrMessages from "~/messages/mr.json";
@@ -22,7 +22,7 @@ const messages: Record<Locale, Messages> = {
   kn: knMessages,
   ta: taMessages,
   ml: mlMessages,
-  // Fallback to English for languages without translations yet
+ 
   gu: enMessages,
   pa: enMessages,
   bn: enMessages,
@@ -38,7 +38,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
-// Utility function to get nested value from object using dot notation
+
 function getNestedValue(obj: Record<string, unknown>, path: string): string {
   const value = path.split(".").reduce((current: unknown, key) => {
     if (current && typeof current === "object" && key in current) {
@@ -50,7 +50,7 @@ function getNestedValue(obj: Record<string, unknown>, path: string): string {
   return typeof value === "string" ? value : path;
 }
 
-// Function to interpolate parameters in translation string
+
 function interpolate(str: string, params?: Record<string, string | number>): string {
   if (!params) return str;
   

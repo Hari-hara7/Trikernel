@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const messageRouter = createTRPCRouter({
-  // Send a message
+ 
   send: protectedProcedure
     .input(
       z.object({
@@ -51,7 +51,7 @@ export const messageRouter = createTRPCRouter({
       return message;
     }),
 
-  // Get conversation with a user
+ 
   getConversation: protectedProcedure
     .input(
       z.object({
@@ -88,7 +88,7 @@ export const messageRouter = createTRPCRouter({
         nextCursor = nextItem!.id;
       }
 
-      // Mark messages as read
+      
       await ctx.db.message.updateMany({
         where: {
           senderId: input.userId,
@@ -104,9 +104,9 @@ export const messageRouter = createTRPCRouter({
       };
     }),
 
-  // Get all conversations (inbox)
+ 
   getInbox: protectedProcedure.query(async ({ ctx }) => {
-    // Get unique users the current user has messaged with
+    
     const sentMessages = await ctx.db.message.findMany({
       where: { senderId: ctx.session.user.id },
       distinct: ["receiverId"],
